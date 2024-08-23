@@ -23,23 +23,15 @@
               {%- endif -%}
 
               <li class="cart-item-container">
-                <a class="cart-mobile-image" href="{{ item.url }}">
-                  <img class="global-border-radius" src="{{ item | img_url: '400x' }}" alt="{{ item.title | escape }}">
-                </a>
                 <div class="cart-item flex">
-                    {% if item.image != blank %}
-                      <a class="image" href="{{ item.url }}">
-                        <img class="global-border-radius" src="{{ item | img_url: '400x' }}" alt="{{ item.title | escape }}">
-                      </a>
-                    {% endif %}
-                  <div class="description">
-                    <a class="description__title" href="{{ item.url }}">{{ item.product.title }}</a>
 
+                  <div class="description">
                     {% unless item.product.has_only_default_variant %}
                       {% for option_title in item.product.options %}
                         <p class="description__variant">{{ option_title }} : {{ item.variant.options[forloop.index0] }}</p>
                       {% endfor %}
                     {% endunless %}
+                    <p style="margin: 0; color: #202020b3; font-size: 16px;">{{item.sku}}</p>
 
                     {%- assign property_size = item.properties | size -%}
 

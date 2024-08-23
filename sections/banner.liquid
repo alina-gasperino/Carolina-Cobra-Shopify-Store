@@ -1,5 +1,24 @@
 {% if section.settings.show_banner %}
   <section class="large-row full-width-slideshow full-width-slideshow--banner full-width-background relative section-{{ section.id }}" data-section-id="{{ section.id }}" data-section-type="banner">
+    
+    <div class="cobra-list-parts">
+      <select name="list-parts" id="list-parts">
+          <option value='none' data-display="Select Your Motorcycle" selected disabled>Select Your Motorcycle</option>
+        
+        {% for link in linklists.cobra-parts.links %}
+          <option value="{{ link.url }}" disabled>{{ link.title }}</option>
+  
+        {% if link.links.size > 0 %}
+            {% for child_link in link.links %}
+                <option value="{{ child_link.url }}">{{ child_link.title }}</option>
+            {% endfor %}
+        {% endif %}
+        
+        {% endfor %}
+      </select>
+      <input class="button parts" type="button" value="Select" />
+    </div>
+
     {% style %}
       main .accent-background {
         display: none;

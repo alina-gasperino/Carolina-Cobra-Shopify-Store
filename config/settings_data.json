@@ -3,18 +3,18 @@
     "color_body_background": "#ffffff",
     "accent_color": "rgba(0,0,0,0)",
     "color_body_text": "#202020",
-    "color_body_link": "#202020",
+    "color_body_link": "#8c8c8c",
     "color_sale_text": "#cd201a",
     "header_bck_color": "#ffffff",
     "logo_text_color": "#202020",
     "header_text_color": "#202020",
     "mobile_open_search_bar_color": "#202020",
     "main_menu_bck_color": "#efefef",
-    "main_menu_link_color": "#202020",
+    "main_menu_link_color": "#000000",
     "mobile_menu_bck_color": "#efefef",
-    "announcement_bar_bck_color": "#202020",
-    "announcement_bar_txt_color": "#efefef",
-    "store_messages_bck_color": "#202020",
+    "announcement_bar_bck_color": "#0000ff",
+    "announcement_bar_txt_color": "#ffffff",
+    "store_messages_bck_color": "#0000ff",
     "store_messages_txt_color": "#ffffff",
     "footer_bck_color": "#202020",
     "footer_text_color": "#ffffff",
@@ -42,6 +42,7 @@
     "uppercase_navigation": true,
     "type_logo_font": "archivo_narrow_i7",
     "font_size_logo_int": 24,
+    "letter_spacing_logo": 0,
     "uppercase_product_titles": true,
     "uppercase_buttons": true,
     "global_border_radius": 0,
@@ -56,22 +57,27 @@
     "quickbuy_show_quantity_selector": false,
     "show_tax_and_shipping": false,
     "quickbuy_show_backorder_text": false,
-    "enable_payment_button": true,
+    "enable_payment_button": false,
     "variant_style": "dropdown",
     "swatch_enabled": false,
     "swatch_option_name": "Color",
     "swatch_method": "css",
+    "social_facebook_url": "https:\/\/www.facebook.com\/carolinacobraconnection",
+    "social_instagram_url": "https:\/\/www.instagram.com\/nccobra\/",
+    "social_custom_icon": "shopify:\/\/shop_images\/badger.png",
     "on_add_to_cart": "go_to_cart",
     "search_type": "product",
     "enable_live_search": false,
     "live_search_show_price": false,
     "live_search_show_vendor": false,
+    "favicon": "shopify:\/\/shop_images\/badger.png",
+    "checkout_logo_image": "shopify:\/\/shop_images\/CCC_Web_Main_logo_220x_555b6400-0b95-4bdb-8059-3985c09e8fb2.webp",
     "checkout_logo_position": "center",
     "checkout_logo_size": "small",
-    "checkout_body_background_color": "#f4f4f4",
+    "checkout_body_background_color": "#ffffff",
     "checkout_input_background_color_mode": "white",
     "checkout_sidebar_background_image": "",
-    "checkout_sidebar_background_color": "#ffffff",
+    "checkout_sidebar_background_color": "#efefef",
     "checkout_heading_font": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
     "checkout_body_font": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
     "checkout_accent_color": "#197bbd",
@@ -85,9 +91,76 @@
     "sections": {
       "header": {
         "type": "header",
+        "blocks": {
+          "menu_promo_FBYpKA": {
+            "type": "menu_promo",
+            "settings": {
+              "dropdown_link_title": "",
+              "text": "",
+              "link_text": "",
+              "link_url": ""
+            }
+          },
+          "menu_promo_r3e6by": {
+            "type": "menu_promo",
+            "settings": {
+              "dropdown_link_title": "",
+              "text": "",
+              "link_text": "",
+              "link_url": ""
+            }
+          },
+          "menu_promo_dzzWzd": {
+            "type": "menu_promo",
+            "settings": {
+              "dropdown_link_title": "",
+              "text": "",
+              "link_text": "",
+              "link_url": ""
+            }
+          },
+          "menu_promo_hVmLJd": {
+            "type": "menu_promo",
+            "settings": {
+              "dropdown_link_title": "",
+              "text": "",
+              "link_text": "",
+              "link_url": ""
+            }
+          },
+          "544b8af6-505d-4feb-8edd-c7ad7d5d1150": {
+            "type": "menu_promo",
+            "disabled": true,
+            "settings": {
+              "dropdown_link_title": "select-bike",
+              "text": "",
+              "link_text": "",
+              "link_url": ""
+            }
+          },
+          "1c29dc2d-1cf0-45c5-a5c3-2577618adbca": {
+            "type": "menu_promo",
+            "disabled": true,
+            "settings": {
+              "dropdown_link_title": "asdfasdf",
+              "text": "asdfasdf",
+              "link_text": "asdf",
+              "link_url": ""
+            }
+          }
+        },
+        "block_order": [
+          "menu_promo_FBYpKA",
+          "menu_promo_r3e6by",
+          "menu_promo_dzzWzd",
+          "menu_promo_hVmLJd",
+          "544b8af6-505d-4feb-8edd-c7ad7d5d1150",
+          "1c29dc2d-1cf0-45c5-a5c3-2577618adbca"
+        ],
+        "custom_css": [],
         "settings": {
           "logo": "shopify:\/\/shop_images\/CCC_Web_Main_logo.jpg",
-          "logo_width": 140,
+          "logo_width": 200,
           "desktop_layout": "left",
           "show_search_bar_desktop": false,
           "show_search_bar_mobile": false,
@@ -95,15 +168,15 @@
           "dock_nav": true,
           "show_announcement_bar": true,
           "home_only_announcement_bar": false,
-          "announcement_bar_text": "Add notices for your shoppers here",
+          "announcement_bar_text": "NEED HELP FINDING SOMETHING OR HAVE A QUESTION? TEXT 704.902.8004",
           "announcement_bar_url": "",
           "main_linklist": "main-menu",
-          "show_locale_selector": true,
+          "show_locale_selector": false,
           "show_currency_selector": false,
           "show_messages": true,
-          "home_only_messages": false,
+          "home_only_messages": true,
           "slideshow_messages": false,
-          "message_1_text": "",
+          "message_1_text": "SAME DAY SHIPPING - USPS CUTOFF 3:45 PM & UPS UP TO 5PM EST*",
           "message_1_url": "",
           "message_2_text": "",
           "message_2_url": "",
@@ -114,9 +187,9 @@
       "footer": {
         "type": "footer",
         "settings": {
-          "footer_linklist": "",
+          "footer_linklist": "footer",
           "small_linklist": "",
-          "show_social_icons": false,
+          "show_social_icons": true,
           "show_payment_icons": true,
           "sticky_footer": false,
           "show_locale_selector": false,
@@ -131,11 +204,44 @@
       "1526918441414": {
         "type": "slideshow-section",
         "blocks": {
+          "1528388066492": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Levan.jpg",
+              "image_position": "center center",
+              "image_link": "",
+              "color_overlay_bg": "rgba(0,0,0,0)",
+              "overlay_opacity": 80,
+              "color_overlay_text": "#ffffff",
+              "overlay_title": "",
+              "overlay_text": "",
+              "overlay_url_text_1": "",
+              "overlay_url_1": "",
+              "overlay_url_text_2": "",
+              "overlay_url_2": "",
+              "overlay_url_style": "button_2",
+              "enlarge_title": true,
+              "enlarge_text": false,
+              "overlay_position_x": 24,
+              "overlay_position_y": 24,
+              "color_label_background": "rgba(0,0,0,0)",
+              "color_label_text": "#ffffff",
+              "show_chevron": false,
+              "product_id_1": "",
+              "chevron_position_1": "right",
+              "label_position_x_1": 40,
+              "label_position_y_1": 20,
+              "product_id_2": "",
+              "chevron_position_2": "right",
+              "label_position_x_2": 89,
+              "label_position_y_2": 47
+            }
+          },
           "1526918441414-0": {
             "type": "image",
             "settings": {
-              "image": "shopify:\/\/shop_images\/D819F864-6819-4042-9A4A-E8980F43D88F.jpg",
-              "image_position": "center left",
+              "image": "shopify:\/\/shop_images\/20231.jpg",
+              "image_position": "top center",
               "image_link": "",
               "color_overlay_bg": "rgba(0,0,0,0)",
               "overlay_opacity": 80,
@@ -156,7 +262,7 @@
               "show_chevron": false,
               "product_id_1": "",
               "chevron_position_1": "right",
-              "label_position_x_1": 23,
+              "label_position_x_1": 0,
               "label_position_y_1": 49,
               "product_id_2": "",
               "chevron_position_2": "right",
@@ -164,48 +270,17 @@
               "label_position_y_2": 32
             }
           },
-          "1528387930525": {
-            "type": "image",
-            "settings": {
-              "image_position": "center center",
-              "image_link": "",
-              "color_overlay_bg": "rgba(0,0,0,0)",
-              "overlay_opacity": 80,
-              "color_overlay_text": "#ffffff",
-              "overlay_title": "Slideshow",
-              "overlay_text": "Use this section to welcome customers to your store, show off your images or display a promotion",
-              "overlay_url_text_1": "",
-              "overlay_url_1": "",
-              "overlay_url_text_2": "",
-              "overlay_url_2": "",
-              "overlay_url_style": "button_2",
-              "enlarge_title": true,
-              "enlarge_text": false,
-              "overlay_position_x": 25,
-              "overlay_position_y": 50,
-              "color_label_background": "rgba(0,0,0,0)",
-              "color_label_text": "#ffffff",
-              "show_chevron": false,
-              "product_id_1": "",
-              "chevron_position_1": "right",
-              "label_position_x_1": 32,
-              "label_position_y_1": 72,
-              "product_id_2": "",
-              "chevron_position_2": "right",
-              "label_position_x_2": 65,
-              "label_position_y_2": 34
-            }
-          },
           "1528388050120": {
             "type": "image",
             "settings": {
+              "image": "shopify:\/\/shop_images\/NIX.jpg",
               "image_position": "center center",
               "image_link": "",
               "color_overlay_bg": "rgba(0,0,0,0)",
               "overlay_opacity": 80,
               "color_overlay_text": "#230051",
-              "overlay_title": "Slideshow",
-              "overlay_text": "Use this section to welcome customers to your store, show off your images or display a promotion",
+              "overlay_title": "",
+              "overlay_text": "",
               "overlay_url_text_1": "",
               "overlay_url_1": "",
               "overlay_url_text_2": "",
@@ -228,95 +303,72 @@
               "label_position_y_2": 50
             }
           },
-          "1528388066492": {
+          "e5aae394-85fb-4146-b276-00b3aad8e75b": {
             "type": "image",
             "settings": {
+              "image": "shopify:\/\/shop_images\/Mini-O.jpg",
               "image_position": "center center",
               "image_link": "",
-              "color_overlay_bg": "rgba(0,0,0,0)",
+              "color_overlay_bg": "#ffffff",
               "overlay_opacity": 80,
-              "color_overlay_text": "#ffffff",
+              "color_overlay_text": "#333333",
               "overlay_title": "Slideshow",
               "overlay_text": "Use this section to welcome customers to your store, show off your images or display a promotion",
               "overlay_url_text_1": "",
               "overlay_url_1": "",
               "overlay_url_text_2": "",
               "overlay_url_2": "",
-              "overlay_url_style": "button_2",
-              "enlarge_title": true,
+              "overlay_url_style": "button_1",
+              "enlarge_title": false,
               "enlarge_text": false,
-              "overlay_position_x": 24,
-              "overlay_position_y": 24,
-              "color_label_background": "rgba(0,0,0,0)",
-              "color_label_text": "#ffffff",
-              "show_chevron": false,
+              "overlay_position_x": 50,
+              "overlay_position_y": 80,
+              "color_label_background": "#ffffff",
+              "color_label_text": "#333333",
+              "show_chevron": true,
               "product_id_1": "",
               "chevron_position_1": "right",
-              "label_position_x_1": 40,
-              "label_position_y_1": 20,
+              "label_position_x_1": 20,
+              "label_position_y_1": 30,
               "product_id_2": "",
               "chevron_position_2": "right",
-              "label_position_x_2": 89,
-              "label_position_y_2": 47
+              "label_position_x_2": 80,
+              "label_position_y_2": 50
             }
           }
         },
         "block_order": [
+          "1528388066492",
           "1526918441414-0",
-          "1528387930525",
           "1528388050120",
-          "1528388066492"
+          "e5aae394-85fb-4146-b276-00b3aad8e75b"
         ],
+        "disabled": true,
         "settings": {
           "height": "fixed",
-          "height_desktop": 300,
-          "height_mobile": 220,
+          "height_desktop": 640,
+          "height_mobile": 360,
           "mobile_text_below": false,
-          "slideshow_autoplay": false,
-          "slideshow_autoplay_speed": 6
+          "slideshow_autoplay": true,
+          "slideshow_autoplay_speed": 5
         }
       },
       "1526918577590": {
         "type": "featured-collection",
-        "disabled": true,
         "settings": {
-          "title": "Featured collection",
+          "title": "",
           "enlarge_title": false,
-          "link_text": "Shop now",
-          "collection": "",
+          "link_text": "",
+          "collection": "chains-sprockets",
           "show_vendor": false,
-          "enable_carousel": true,
-          "grid": 4,
-          "row_count": 1,
+          "enable_carousel": false,
+          "grid": 5,
+          "row_count": 5,
           "grid_mobile": "2"
-        }
-      },
-      "1526918592986": {
-        "type": "featured-blog",
-        "disabled": true,
-        "settings": {
-          "image_position": "center center",
-          "title": "Blog posts",
-          "description": "Short description of your blog",
-          "color_overlay_bg": "#ffffff",
-          "overlay_opacity": 80,
-          "color_overlay_text": "#230051",
-          "show_view_all": true,
-          "overlay_url_style": "link_style",
-          "enlarge_title": true,
-          "enlarge_text": false,
-          "overlay_position_y": 84,
-          "blog": "",
-          "post_limit": 3,
-          "show_author": true,
-          "show_date": true,
-          "show_tags": true,
-          "show_featured_products": true
         }
       },
       "1526918623457": {
         "type": "promotional-images-section",
-        "disabled": true,
         "blocks": {
           "1526918623457-0": {
             "type": "image",
@@ -359,132 +411,11 @@
           "1526918623457-0",
           "1526918623457-1"
         ],
+        "disabled": true,
         "settings": {}
-      },
-      "1527004908322": {
-        "type": "image-with-text",
-        "disabled": true,
-        "settings": {
-          "image_link": "",
-          "image_size": "0",
-          "image_position": "right",
-          "title": "Image with text",
-          "text": "<p>Advertise a sale! Or tell your shoppers something about yourself.<\/p>",
-          "button_label": "Optional button",
-          "button_link": "",
-          "url_style": "button_1",
-          "enlarge_title": true,
-          "enlarge_text": false,
-          "text_alignment": "center",
-          "color_bg": "#fbeae5",
-          "color_text": "#230051"
-        }
-      },
-      "1527004995326": {
-        "type": "collection-list",
-        "blocks": {
-          "1527004995326-0": {
-            "type": "collection",
-            "settings": {
-              "collection": "newest-products"
-            }
-          },
-          "1527004995326-1": {
-            "type": "collection",
-            "settings": {
-              "collection": ""
-            }
-          },
-          "1527004995326-2": {
-            "type": "collection",
-            "settings": {
-              "collection": ""
-            }
-          },
-          "1527004995326-3": {
-            "type": "collection",
-            "settings": {
-              "collection": ""
-            }
-          }
-        },
-        "block_order": [
-          "1527004995326-0",
-          "1527004995326-1",
-          "1527004995326-2",
-          "1527004995326-3"
-        ],
-        "settings": {
-          "title": "Shop our collections",
-          "enlarge_title": false,
-          "grid": 4
-        }
-      },
-      "1529074364124": {
-        "type": "get-the-look-section",
-        "disabled": true,
-        "blocks": {
-          "1529074364124-0": {
-            "type": "product",
-            "settings": {
-              "product_id": ""
-            }
-          },
-          "1529074364124-1": {
-            "type": "product",
-            "settings": {
-              "product_id": ""
-            }
-          },
-          "1529074505167": {
-            "type": "product",
-            "settings": {
-              "product_id": ""
-            }
-          }
-        },
-        "block_order": [
-          "1529074364124-0",
-          "1529074364124-1",
-          "1529074505167"
-        ],
-        "settings": {
-          "image_position": "center center",
-          "background_color": "#e3f1df",
-          "show_vendor": false,
-          "color_overlay_bg": "rgba(0,0,0,0)",
-          "overlay_opacity": 80,
-          "color_overlay_text": "#230051",
-          "overlay_title": "Get the look",
-          "overlay_text": "Showcase up to six products together",
-          "overlay_url_text": "Optional button",
-          "overlay_url": "",
-          "overlay_url_style": "button_1",
-          "enlarge_title": true,
-          "enlarge_text": true,
-          "overlay_position_y": 82
-        }
-      },
-      "1595573501451": {
-        "type": "rich-text",
-        "disabled": true,
-        "settings": {
-          "title": "Rich text",
-          "text": "<p>Use this text to share information about your store with your customers.<\/p><p>Describe products, share announcements, or welcome customers to your store.<\/p>",
-          "button_label": "",
-          "button_link": "",
-          "url_style": "button_1",
-          "enlarge_title": true,
-          "enlarge_text": true,
-          "full_width": false,
-          "color_bg": "#ffffff",
-          "color_title": "#230051",
-          "color_text": "#230051"
-        }
       },
       "16025808319409da72": {
         "type": "testimonials",
-        "disabled": true,
         "blocks": {
           "16025808319409da72-0": {
             "type": "testimonial",
@@ -516,6 +447,7 @@
           "16025808319409da72-1",
           "57a60dfc-c7ab-456a-9c89-6226ac0b2270"
         ],
+        "disabled": true,
         "settings": {
           "title": "Testimonials",
           "color_bg": "#d5f3f3",
@@ -531,16 +463,15 @@
       },
       "16025816384d7f02da": {
         "type": "gallery",
-        "disabled": true,
         "blocks": {
-          "16025816384d7f02da-0": {
+          "e3c73a28-f6d8-4203-b5c8-e5ac53c4c1e0": {
             "type": "image",
             "settings": {
-              "image": "shopify:\/\/shop_images\/2021CobraCXFEWKing-lowres.jpg",
+              "image": "shopify:\/\/shop_images\/Mini-O.jpg",
               "alignment": "center center",
               "enlarge_image": false,
-              "link": "shopify:\/\/collections\/newest-products",
-              "title": "2021 Models",
+              "link": "",
+              "title": "",
               "text": "",
               "button_label": "",
               "overlay_position": "center-center"
@@ -549,22 +480,24 @@
           "16025816384d7f02da-1": {
             "type": "image",
             "settings": {
+              "image": "shopify:\/\/shop_images\/NIX.jpg",
               "alignment": "center center",
               "enlarge_image": false,
               "link": "",
-              "title": "Image title",
+              "title": "",
               "text": "",
               "button_label": "",
               "overlay_position": "center-center"
             }
           },
-          "16025816384d7f02da-2": {
+          "7c371cf8-910c-401f-9aaa-da1c05e5cf24": {
             "type": "image",
             "settings": {
+              "image": "shopify:\/\/shop_images\/homehandle.jpg",
               "alignment": "center center",
               "enlarge_image": false,
               "link": "",
-              "title": "Image title",
+              "title": "",
               "text": "",
               "button_label": "",
               "overlay_position": "center-center"
@@ -573,10 +506,11 @@
           "16025816384d7f02da-3": {
             "type": "image",
             "settings": {
+              "image": "shopify:\/\/shop_images\/Levan.jpg",
               "alignment": "center center",
               "enlarge_image": false,
               "link": "",
-              "title": "Image title",
+              "title": "",
               "text": "",
               "button_label": "",
               "overlay_position": "center-center"
@@ -585,10 +519,50 @@
           "5ae672c3-b250-49b5-bb29-3a415e85ae3c": {
             "type": "image",
             "settings": {
+              "image": "shopify:\/\/shop_images\/cathyscreek-1935.jpg",
               "alignment": "center center",
               "enlarge_image": false,
               "link": "",
-              "title": "Image title",
+              "title": "",
+              "text": "",
+              "button_label": "",
+              "overlay_position": "center-center"
+            }
+          },
+          "16025816384d7f02da-2": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Rasnick_c0e00573-541a-4eab-a014-bc2c3a249a1e.jpg",
+              "alignment": "center center",
+              "enlarge_image": false,
+              "link": "",
+              "title": "",
+              "text": "",
+              "button_label": "",
+              "overlay_position": "center-center"
+            }
+          },
+          "16025816384d7f02da-0": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Cobra-2023.jpg",
+              "alignment": "center center",
+              "enlarge_image": false,
+              "link": "",
+              "title": "",
+              "text": "",
+              "button_label": "",
+              "overlay_position": "center-center"
+            }
+          },
+          "92e6b125-9ed4-4415-a665-cd27c34a6eac": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/A5AD6F95-82D9-40AD-9526-C2B012DDBA19.jpg",
+              "alignment": "center center",
+              "enlarge_image": false,
+              "link": "",
+              "title": "",
               "text": "",
               "button_label": "",
               "overlay_position": "center-center"
@@ -596,85 +570,27 @@
           }
         },
         "block_order": [
-          "16025816384d7f02da-0",
+          "e3c73a28-f6d8-4203-b5c8-e5ac53c4c1e0",
           "16025816384d7f02da-1",
-          "16025816384d7f02da-2",
+          "7c371cf8-910c-401f-9aaa-da1c05e5cf24",
           "16025816384d7f02da-3",
-          "5ae672c3-b250-49b5-bb29-3a415e85ae3c"
+          "5ae672c3-b250-49b5-bb29-3a415e85ae3c",
+          "16025816384d7f02da-2",
+          "16025816384d7f02da-0",
+          "92e6b125-9ed4-4415-a665-cd27c34a6eac"
         ],
+        "disabled": true,
         "settings": {
-          "grid": 3,
-          "image_height": 280,
+          "grid": 4,
+          "image_height": 300,
           "image_height_mobile": 300,
-          "enable_margin": true,
+          "enable_margin": false,
           "enable_carousel": true,
-          "overlay_style": "full",
+          "overlay_style": "no_background",
           "color_overlay_bg": "rgba(0,0,0,0)",
           "overlay_opacity": 0,
           "color_overlay_text": "#ffffff",
-          "overlay_url_style": "button_1"
-        }
-      },
-      "16025826624be5d6b7": {
-        "type": "logo-list",
-        "disabled": true,
-        "blocks": {
-          "16025826624be5d6b7-0": {
-            "type": "logo",
-            "settings": {
-              "image_width": 160,
-              "link": "",
-              "title": ""
-            }
-          },
-          "16025826624be5d6b7-1": {
-            "type": "logo",
-            "settings": {
-              "image_width": 160,
-              "link": "",
-              "title": ""
-            }
-          },
-          "16025826624be5d6b7-2": {
-            "type": "logo",
-            "settings": {
-              "image_width": 160,
-              "link": "",
-              "title": ""
-            }
-          },
-          "4b13c16b-2e72-404f-8bdc-ff58cca1d9fd": {
-            "type": "logo",
-            "settings": {
-              "image_width": 160,
-              "link": "",
-              "title": ""
-            }
-          },
-          "8ac20df7-83e7-4ebc-95c1-c1ee220c416f": {
-            "type": "logo",
-            "settings": {
-              "image_width": 160,
-              "link": "",
-              "title": ""
-            }
-          }
-        },
-        "block_order": [
-          "16025826624be5d6b7-0",
-          "16025826624be5d6b7-1",
-          "16025826624be5d6b7-2",
-          "4b13c16b-2e72-404f-8bdc-ff58cca1d9fd",
-          "8ac20df7-83e7-4ebc-95c1-c1ee220c416f"
-        ],
-        "settings": {
-          "title": "Logo list",
-          "color_bg": "#ffffff",
-          "color_title": "#230051",
-          "color_text": "#230051",
-          "enlarge_title": false,
-          "enlarge_text": false,
-          "image_opacity": 100
+          "overlay_url_style": "link_style"
         }
       },
       "161486836124c871e4": {
@@ -698,20 +614,53 @@
       "banner": {
         "type": "banner",
         "blocks": {
-          "54a6ec41-6845-433d-9e9f-e79f87fa39f9": {
+          "image_LRwTwF": {
             "type": "image",
             "settings": {
-              "image": "shopify:\/\/shop_images\/887278C1-CB31-4048-BDCB-99D6C5D573F4.jpg",
+              "image": "shopify:\/\/shop_images\/CobraMoto_FWE_02.png",
+              "image_position": "center center",
+              "image_link": "",
+              "color_overlay_bg": "#ffffff",
+              "overlay_opacity": 52,
+              "color_overlay_text": "#333333",
+              "overlay_title": "",
+              "overlay_text": "",
+              "overlay_url_text_1": "",
+              "overlay_url_1": "",
+              "overlay_url_text_2": "",
+              "overlay_url_2": "",
+              "overlay_url_style": "button_1",
+              "enlarge_title": false,
+              "enlarge_text": false,
+              "overlay_position_x": 80,
+              "overlay_position_y": 10,
+              "color_label_background": "#ffffff",
+              "color_label_text": "#333333",
+              "show_chevron": true,
+              "product_id_1": "",
+              "chevron_position_1": "right",
+              "label_position_x_1": 0,
+              "label_position_y_1": 0,
+              "product_id_2": "",
+              "chevron_position_2": "right",
+              "label_position_x_2": 80,
+              "label_position_y_2": 50
+            }
+          },
+          "2a4b2efb-7f4b-4b14-92f6-3803e1ab9825": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/CobraMoto_CX50JR_13.jpg",
               "image_position": "center center",
               "image_link": "",
               "color_overlay_bg": "#ffffff",
               "overlay_opacity": 80,
               "color_overlay_text": "#333333",
-              "overlay_title": "Banner",
-              "overlay_text": "Use this full width section to welcome customers to your store, share some news or say something about your brand",
-              "overlay_url_text_1": "Optional buttons",
+              "overlay_title": "",
+              "overlay_text": "",
+              "overlay_url_text_1": "",
               "overlay_url_1": "",
-              "overlay_url_text_2": "Optional buttons",
+              "overlay_url_text_2": "",
               "overlay_url_2": "",
               "overlay_url_style": "button_1",
               "enlarge_title": false,
@@ -730,32 +679,101 @@
               "label_position_x_2": 80,
               "label_position_y_2": 50
             }
+          },
+          "1c63aa63-0a16-4737-a7f7-616d9cdebbeb": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/NIX.jpg",
+              "image_position": "center center",
+              "image_link": "",
+              "color_overlay_bg": "#ffffff",
+              "overlay_opacity": 0,
+              "color_overlay_text": "#333333",
+              "overlay_title": "",
+              "overlay_text": "",
+              "overlay_url_text_1": "",
+              "overlay_url_1": "",
+              "overlay_url_text_2": "",
+              "overlay_url_2": "",
+              "overlay_url_style": "button_1",
+              "enlarge_title": false,
+              "enlarge_text": false,
+              "overlay_position_x": 50,
+              "overlay_position_y": 80,
+              "color_label_background": "#ffffff",
+              "color_label_text": "#333333",
+              "show_chevron": true,
+              "product_id_1": "",
+              "chevron_position_1": "right",
+              "label_position_x_1": 20,
+              "label_position_y_1": 30,
+              "product_id_2": "",
+              "chevron_position_2": "right",
+              "label_position_x_2": 80,
+              "label_position_y_2": 50
+            }
+          },
+          "afeed35d-9a60-4594-9004-0ec2930235c1": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/CX50e_home.jpg",
+              "image_position": "center center",
+              "image_link": "",
+              "color_overlay_bg": "#000000",
+              "overlay_opacity": 80,
+              "color_overlay_text": "#333333",
+              "overlay_title": "",
+              "overlay_text": "",
+              "overlay_url_text_1": "",
+              "overlay_url_1": "",
+              "overlay_url_text_2": "",
+              "overlay_url_2": "",
+              "overlay_url_style": "button_1",
+              "enlarge_title": false,
+              "enlarge_text": false,
+              "overlay_position_x": 50,
+              "overlay_position_y": 80,
+              "color_label_background": "#ffffff",
+              "color_label_text": "#333333",
+              "show_chevron": false,
+              "product_id_1": "",
+              "chevron_position_1": "right",
+              "label_position_x_1": 20,
+              "label_position_y_1": 30,
+              "product_id_2": "",
+              "chevron_position_2": "right",
+              "label_position_x_2": 80,
+              "label_position_y_2": 50
+            }
           }
         },
         "block_order": [
-          "54a6ec41-6845-433d-9e9f-e79f87fa39f9"
+          "image_LRwTwF",
+          "2a4b2efb-7f4b-4b14-92f6-3803e1ab9825",
+          "1c63aa63-0a16-4737-a7f7-616d9cdebbeb",
+          "afeed35d-9a60-4594-9004-0ec2930235c1"
         ],
         "settings": {
-          "show_banner": false,
+          "show_banner": true,
           "height": "fixed",
-          "height_desktop": 1000,
-          "height_mobile": 400,
+          "height_desktop": 600,
+          "height_mobile": 260,
           "mobile_text_below": true,
-          "slideshow_autoplay": true,
-          "slideshow_autoplay_speed": 6
+          "slideshow_autoplay": false,
+          "slideshow_autoplay_speed": 5
         }
       },
       "popup": {
         "type": "popup",
         "settings": {
           "mode": "disabled",
-          "popup_delay_seconds": 5,
-          "popup_dismiss_for_days": 30,
+          "popup_delay_seconds": 2,
+          "popup_dismiss_for_days": 2,
           "position": "center",
-          "title": "Sign up and save",
-          "text": "<p>Entice customers to sign up for your mailing list with discounts or exclusive offers.<\/p>",
+          "title": "SHIPPING MAY BE DELAYED",
+          "text": "<p>HEADS UP! WE'LL BE OUT OF THE SHOP ATTENDING THE SE REGIONAL QUALIFIER AT NCMP AND WON'T BE SHIPPING PARTS TILL NEXT WEEK. SORRY FOR ANY INCONVENIENCE THIS MAY CAUSE. THANKS!<\/p>",
           "show_newsletter": false,
-          "show_social_icons": true
+          "show_social_icons": false
         }
       },
       "product-recommendations": {
@@ -781,7 +799,7 @@
           "feature_header_filter_overlap": false,
           "grid": 5,
           "grid_mobile": "2",
-          "pagination_limit": 13,
+          "pagination_limit": 25,
           "ajax_products": false,
           "show_vendor": false,
           "show_sort_by": false,
@@ -809,7 +827,7 @@
           "show_pickup_availability": false,
           "show_tax_and_shipping": false,
           "show_backorder_text": false,
-          "description_position": "below_cart",
+          "description_position": "above_cart",
           "show_tabs": false,
           "tab_2_page": "",
           "tab_3_page": "",
@@ -871,7 +889,7 @@
           "enable_cart_notes": true,
           "cart_terms_page": "",
           "show_additional_checkout_buttons": true,
-          "show_backorder_text": true,
+          "show_backorder_text": false,
           "show_recently_viewed": true,
           "show_recently_viewed_vendor": false,
           "show_shipping_calculator": false,
@@ -886,22 +904,328 @@
           "grid_mobile": "2",
           "pagination_limit": 16
         }
+      },
+      "16548031548c648ff2": {
+        "type": "collection-list",
+        "blocks": {
+          "16548031548c648ff2-0": {
+            "type": "collection",
+            "settings": {
+              "collection": "2024-cobra-cx5e"
+            }
+          },
+          "16548031548c648ff2-1": {
+            "type": "collection",
+            "settings": {
+              "collection": "2022-cobra-cx50jr"
+            }
+          },
+          "16548031548c648ff2-2": {
+            "type": "collection",
+            "settings": {
+              "collection": ""
+            }
+          }
+        },
+        "block_order": [
+          "16548031548c648ff2-0",
+          "16548031548c648ff2-1",
+          "16548031548c648ff2-2"
+        ],
+        "disabled": true,
+        "custom_css": [],
+        "settings": {
+          "title": "",
+          "enlarge_title": false,
+          "grid": 5
+        }
+      },
+      "1661513748001017ce": {
+        "type": "instafeed",
+        "disabled": true,
+        "settings": {
+          "heading_size": 10,
+          "feed_width": 95,
+          "html_area": ""
+        }
+      },
+      "f2544226-bc00-4ad5-b477-8cf665642bfe": {
+        "type": "promotional-images-section",
+        "blocks": {
+          "f2544226-bc00-4ad5-b477-8cf665642bfe-167362666740a1d441-0": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/NIX.jpg",
+              "image_position": "center center",
+              "image_link": "",
+              "layout": "image_before",
+              "color_background": "#dae4e6",
+              "color_text": "#333333",
+              "overlay_opacity": 0,
+              "title": "",
+              "offer": "",
+              "url_text": "",
+              "url": "",
+              "url_style": "button_1",
+              "enlarge_title": false,
+              "enlarge_text": false
+            }
+          },
+          "f2544226-bc00-4ad5-b477-8cf665642bfe-167362666740a1d441-1": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/IMG_7805_2.jpg",
+              "image_position": "center center",
+              "image_link": "",
+              "layout": "image_after",
+              "color_background": "#dae4e6",
+              "color_text": "#333333",
+              "overlay_opacity": 0,
+              "title": "",
+              "offer": "",
+              "url_text": "",
+              "url": "",
+              "url_style": "button_1",
+              "enlarge_title": false,
+              "enlarge_text": false
+            }
+          }
+        },
+        "block_order": [
+          "f2544226-bc00-4ad5-b477-8cf665642bfe-167362666740a1d441-0",
+          "f2544226-bc00-4ad5-b477-8cf665642bfe-167362666740a1d441-1"
+        ],
+        "disabled": true,
+        "settings": {}
+      },
+      "724caa7d-aad4-40f8-9732-fb889e03f51f": {
+        "type": "split-image-section",
+        "blocks": {
+          "724caa7d-aad4-40f8-9732-fb889e03f51f-16736277240c082fb5-0": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/WTT-Racing-Engines-new-logo.jpg",
+              "image_link": "",
+              "image_position": "center center",
+              "color_overlay_bg": "#ffffff",
+              "overlay_opacity": 80,
+              "color_overlay_text": "#333333",
+              "overlay_title": "",
+              "overlay_text": "",
+              "overlay_url_text": "",
+              "overlay_url": "",
+              "overlay_url_style": "link_style",
+              "enlarge_title": false,
+              "enlarge_text": false,
+              "overlay_position_x": 21,
+              "overlay_position_y": 80,
+              "mobile_text_below": false,
+              "color_label_background": "#ffffff",
+              "color_label_text": "#333333",
+              "product_id": "",
+              "show_chevron": false,
+              "chevron_position": "right",
+              "label_position_x": 20,
+              "label_position_y": 20
+            }
+          },
+          "724caa7d-aad4-40f8-9732-fb889e03f51f-16736277240c082fb5-1": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/engine_b693bfe2-e7f7-4458-be82-a485f34a5b58.jpg",
+              "image_link": "",
+              "image_position": "center right",
+              "color_overlay_bg": "#ffffff",
+              "overlay_opacity": 80,
+              "color_overlay_text": "#333333",
+              "overlay_title": "",
+              "overlay_text": "",
+              "overlay_url_text": "",
+              "overlay_url": "",
+              "overlay_url_style": "link_style",
+              "enlarge_title": false,
+              "enlarge_text": false,
+              "overlay_position_x": 50,
+              "overlay_position_y": 20,
+              "mobile_text_below": false,
+              "color_label_background": "#ffffff",
+              "color_label_text": "#333333",
+              "product_id": "",
+              "show_chevron": false,
+              "chevron_position": "right",
+              "label_position_x": 67,
+              "label_position_y": 80
+            }
+          }
+        },
+        "block_order": [
+          "724caa7d-aad4-40f8-9732-fb889e03f51f-16736277240c082fb5-0",
+          "724caa7d-aad4-40f8-9732-fb889e03f51f-16736277240c082fb5-1"
+        ],
+        "disabled": true,
+        "settings": {
+          "height_desktop": 600,
+          "height_mobile": 500
+        }
+      },
+      "6c98a984-1b0c-4d78-bc39-f9ad2ecd7371": {
+        "type": "rich-text",
+        "disabled": true,
+        "settings": {
+          "title": "Rich text",
+          "text": "<p>Use this text to share information about your store with your customers.<\/p><p>Describe products, share announcements, or welcome customers to your store.<\/p>",
+          "button_label": "",
+          "button_link": "",
+          "url_style": "button_1",
+          "enlarge_title": false,
+          "enlarge_text": false,
+          "full_width": false,
+          "color_bg": "#ecf1f2",
+          "color_title": "#333333",
+          "color_text": "#333333"
+        }
+      },
+      "61429079-78db-4c19-b517-73cbe6596e5c": {
+        "type": "collection-list",
+        "blocks": {
+          "61429079-78db-4c19-b517-73cbe6596e5c-16737243367181f4d0-0": {
+            "type": "collection",
+            "settings": {
+              "collection": "2023-cobra-cx50srx-fwe"
+            }
+          },
+          "61429079-78db-4c19-b517-73cbe6596e5c-16737243367181f4d0-1": {
+            "type": "collection",
+            "settings": {
+              "collection": "2023-cobra-cx50jr"
+            }
+          },
+          "61429079-78db-4c19-b517-73cbe6596e5c-16737243367181f4d0-2": {
+            "type": "collection",
+            "settings": {
+              "collection": ""
+            }
+          },
+          "61429079-78db-4c19-b517-73cbe6596e5c-16737243367181f4d0-3": {
+            "type": "collection",
+            "settings": {
+              "collection": ""
+            }
+          },
+          "183f5acf-a190-4756-9928-96f86fbd0a78": {
+            "type": "collection",
+            "settings": {
+              "collection": ""
+            }
+          }
+        },
+        "block_order": [
+          "61429079-78db-4c19-b517-73cbe6596e5c-16737243367181f4d0-0",
+          "61429079-78db-4c19-b517-73cbe6596e5c-16737243367181f4d0-1",
+          "61429079-78db-4c19-b517-73cbe6596e5c-16737243367181f4d0-2",
+          "61429079-78db-4c19-b517-73cbe6596e5c-16737243367181f4d0-3",
+          "183f5acf-a190-4756-9928-96f86fbd0a78"
+        ],
+        "disabled": true,
+        "settings": {
+          "title": "SELECT YOUR BIKE FROM MENU ABOVE OR BELOW...",
+          "enlarge_title": false,
+          "grid": 5
+        }
+      },
+      "9e8e429a-2cef-47e4-86bd-039c8be756ed": {
+        "type": "custom-html-section",
+        "settings": {
+          "custom_html": ""
+        }
+      },
+      "1f6ee3e9-5a47-4042-b495-d0d5bab5a75d": {
+        "type": "image-with-text-overlay",
+        "settings": {
+          "image": "shopify:\/\/shop_images\/banner4.jpg",
+          "image_link": "",
+          "image_position": "center center",
+          "height": "adapt",
+          "height_desktop": 600,
+          "height_mobile": 500,
+          "color_overlay_bg": "#ffffff",
+          "overlay_opacity": 0,
+          "color_overlay_text": "#333333",
+          "overlay_title": "",
+          "overlay_text": "",
+          "overlay_url_text_1": "",
+          "overlay_url_1": "",
+          "overlay_url_text_2": "",
+          "overlay_url_2": "",
+          "overlay_url_style": "button_1",
+          "enlarge_title": false,
+          "enlarge_text": false,
+          "overlay_position_x": 50,
+          "overlay_position_y": 70,
+          "mobile_text_below": false,
+          "color_label_background": "#ffffff",
+          "color_label_text": "#333333",
+          "show_chevron": true,
+          "product_id_1": "",
+          "chevron_position_1": "right",
+          "label_position_x_1": 20,
+          "label_position_y_1": 30,
+          "product_id_2": "",
+          "chevron_position_2": "right",
+          "label_position_x_2": 80,
+          "label_position_y_2": 50
+        }
+      },
+      "0c14cc96-25a1-4ee4-9efb-7cfc5f08727e": {
+        "type": "featured-product",
+        "settings": {
+          "product": "braap-factory-50cc-chain-adjusters",
+          "description": "",
+          "show_vendor": false,
+          "url_style": "button_1",
+          "enlarge_title": false,
+          "enlarge_text": false,
+          "section_background_colour": "#ffffff",
+          "section_text_colour": "#000000",
+          "enable_video_looping": false,
+          "layout": "image_before"
+        }
       }
     },
     "content_for_index": [
-      "1527004908322",
+      "16548031548c648ff2",
+      "61429079-78db-4c19-b517-73cbe6596e5c",
       "1526918441414",
-      "1527004995326",
-      "16025826624be5d6b7",
-      "1526918623457",
-      "1526918592986",
-      "1526918577590",
-      "1595573501451",
-      "1529074364124",
       "16025816384d7f02da",
+      "1661513748001017ce",
+      "1526918623457",
+      "1526918577590",
+      "0c14cc96-25a1-4ee4-9efb-7cfc5f08727e",
       "16025808319409da72",
-      "161486836124c871e4"
-    ]
+      "161486836124c871e4",
+      "f2544226-bc00-4ad5-b477-8cf665642bfe",
+      "6c98a984-1b0c-4d78-bc39-f9ad2ecd7371",
+      "9e8e429a-2cef-47e4-86bd-039c8be756ed",
+      "1f6ee3e9-5a47-4042-b495-d0d5bab5a75d",
+      "724caa7d-aad4-40f8-9732-fb889e03f51f"
+    ],
+    "blocks": {
+      "9901917232353999808": {
+        "type": "shopify:\/\/apps\/buddha-mega-menu-navigation\/blocks\/megamenu\/dbb4ce56-bf86-4830-9b3d-16efbef51c6f",
+        "disabled": false,
+        "settings": {}
+      },
+      "9722070057798483667": {
+        "type": "shopify:\/\/apps\/multivariants-bulk-order\/blocks\/app-embed\/e556349f-fd26-4006-9dd9-dcbf70aa55b3",
+        "disabled": true,
+        "settings": {}
+      },
+      "16278478101612877664": {
+        "type": "shopify:\/\/apps\/pagefly-page-builder\/blocks\/app-embed\/83e179f7-59a0-4589-8c66-c0dddf959200",
+        "disabled": false,
+        "settings": {}
+      }
+    }
   },
   "presets": {
     "Spark": {
@@ -2774,5 +3098,8 @@
         "161495952700faf599"
       ]
     }
+  },
+  "platform_customizations": {
+    "custom_css": []
   }
 }

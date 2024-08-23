@@ -19,3 +19,12 @@
 .product-detail__price.product-price {
     display: none;
 }
+.cart-item {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.cart-item .description__variant {
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.4;
+}
