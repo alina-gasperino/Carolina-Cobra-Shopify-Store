@@ -1,0 +1,229 @@
+<section class="page-footer {% if section.settings.sticky_footer %}page-footer--with-sticky-footer{% endif %}" data-section-id="{{ section.id }}" data-section-type="footer">
+  <div class="page-footer__inner {% if section.settings.sticky_footer %}sticky-footer{% endif %}">
+    <div class="container">
+      <div class="page-width">
+        {% if section.settings.show_subscribe_form %}
+          <div class="footer-row subscribe-form">
+            {% form 'customer' %}
+              {% if form.posted_successfully? %}
+                <div class="subscribe-form__response footer-subscribe-form__response--success">
+                  <h4>{{ 'layout.footer.subscribe_success' | t }}</h4>
+                </div>
+              {% else %}
+                {% if form.errors %}
+                  <div class="subscribe-form__response">
+                    {% for field in form.errors %}
+                    <p class="error-message">{{ field | capitalize }} - {{ form.errors.messages[field] }}</p>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+                <input type="hidden" id="contact_tags" name="contact[tags]" value="prospect,newsletter"/>
+                <div class="subscribe-form__inputs grid">
+                  <div class="grid__item one-quarter small-down--one-whole subscribe-form__side-heading">{{ section.settings.subscribe_title }}</div>
+                  <div class="grid__item one-half small-down--one-whole">
+                    <div class="input-wrapper">
+                      <label class="subscribe-form__label" for="footer_mailinglist_email">{{ section.settings.subscribe_label }}</label>
+                      <input type="email" required class="subscribe-form__email required" value="" id="footer_mailinglist_email" name="contact[email]" />
+                    </div>
+                  </div>
+                  <div class="grid__item one-quarter small-down--one-whole">
+                    <button class="btn btn--secondary subscribe-form__submit" type="submit">{{ section.settings.subscribe_button }}</button>
+                  </div>
+                </div>
+                {% if section.settings.subscribe_description != blank %}
+                <div class="rte small-text">{{ section.settings.subscribe_description }}</div>
+                {% endif %}
+              {% endif %}
+            {% endform %}
+          </div>
+        {% endif %}
+
+        <nav class="footer-navigation {% if section.settings.show_social_icons == true %}grid{% endif %}">
+          {%- assign footer_linklist = section.settings.footer_linklist -%}
+          {% if linklists[footer_linklist].links.size > 0 %}
+            <div class="{% if section.settings.show_social_icons %}grid__item three-quarters small-down--one-whole{% endif %}">
+              {%- assign has_dropdowns = false -%}
+              {%- for link in linklists[footer_linklist].links -%}
+                {%- if link.links != empty -%}
+                  {%- assign has_dropdowns = true -%}
+                {%- endif -%}
+              {%- endfor -%}
+              <ul class="nav footer-nav footer-nav--{% if has_dropdowns %}dropdowns grid{% else %}inline{% endif %}">
+                {% for link in linklists[footer_linklist].links %}
+                  {%- assign child_list_handle = link.title | handleize -%}
+                  {% if menus[child_list_handle].links != blank %}
+                    <li class="nav__item footer-nav__item footer-nav--has-submenu {% if link.active %}footer-nav--active{% endif %} grid__item small-down--one-whole {% if section.settings.show_social_icons == true %} one-third{% else %} one-quarter{% endif %}">
+                      <a href="{{ link.url }}" class="nav__link footer-nav__link footer-nav__link--top">
+                        {{ link.title }}
+                      </a>
+                      <ul class="footer-nav__submenu">
+                        {% for childlink in menus[child_list_handle].links %}
+                          <li {% if childlink.active %}class="footer-nav--active"{% endif %}>
+                            <a href="{{ childlink.url }}" class=" nav__link footer-nav__link footer-nav__link--sub">{{ childlink.title | escape }}</a>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    </li>
+                  {% else %}
+                    <li class="nav__item footer-nav__item {% if link.active %}footer-nav--active{% endif %} {% if has_dropdowns %}grid__item small-down--one-whole {% if section.settings.show_social_icons == true %} one-third{% else %} one-quarter{% endif %}{% endif %}">
+                      <a href="{{ link.url }}" class="nav__link footer-nav__link footer-nav__link--top">{{ link.title }}</a>
+                    </li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+
+          {% if section.settings.show_social_icons %}
+            <div class="footer-social-icons grid__item small-down--one-whole one-quarter">
+              <p class="footer-social-icons__title">{{ 'layout.footer.social_title' | t }}</p>
+              {% if section.settings.show_social_icons %}
+                {% render 'social-icons', icon_setting: settings.social_custom_icon, icon_size: '48x' %}
+              {% endif %}
+            </div>
+          {% endif %}
+        </nav>
+
+        <footer class="page-footer__end">
+          <div>
+            {%- assign small_linklist = section.settings.small_linklist -%}
+            {% if linklists[small_linklist].links.size > 0 %}
+              <ul class="small-nav">
+                {% for link in linklists[small_linklist].links %}
+                  <li class="small-nav__item">
+                    <a class="small-nav__link" href="{{ link.url }}">{{ link.title }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+
+            <small class="copyright-text">
+
+              {{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: "%Y" }} <a href="{{ routes.root_url }}">{{ shop.name }}</a>.
+
+              {{ powered_by_link }}
+
+            </small>
+          </div>
+
+          <div>
+            {%- if section.settings.show_currency_selector or section.settings.show_locale_selector -%}
+              <div class="footer-localization">
+                {% render 'localization', input_prefix: 'footer' %}
+              </div>
+            {%- endif -%}
+
+            {% if section.settings.show_payment_icons %}
+              {% unless shop.enabled_payment_types == empty %}
+                <span class="visually-hidden">{{ 'layout.footer.payment_methods' | t }}</span>
+                <ul class="payment-icons">
+                  {% for type in shop.enabled_payment_types %}
+                    <li class="payment-icon">
+                      {{ type | payment_type_svg_tag: class: 'payment-icon-svg' }}
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% endunless %}
+            {% endif %}
+          </div>
+        </footer>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "footer_linklist",
+        "label": "Primary menu",
+        "default": "footer",
+        "info": "This menu shows dropdown items in columns"
+      },
+      {
+        "type": "link_list",
+        "id": "small_linklist",
+        "label": "Secondary menu",
+        "info": "This menu won't show dropdown items"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_social_icons",
+        "label": "Show social media icons",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_payment_icons",
+        "label": "Show payment icons",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "sticky_footer",
+        "label": "Enable scroll-reveal effect",
+        "default": false,
+        "info": "Only shown on desktop screens"
+      },
+      {
+        "type": "header",
+        "content": "Language Selector",
+        "info": "To add a language, go to your [language settings.](/admin/settings/languages)"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_locale_selector",
+        "label": "Show language selector",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Currency Selector",
+        "info": "To add a currency, go to your [payment settings.](/admin/settings/payments)"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_currency_selector",
+        "label": "Show currency selector",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Newsletter"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_subscribe_form",
+        "label": "Show newsletter signup",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "subscribe_title",
+        "label": "Heading",
+        "default": "Get updates"
+      },
+      {
+        "type": "text",
+        "id": "subscribe_label",
+        "label": "Label",
+        "default": "Email address"
+      },
+      {
+        "type": "text",
+        "id": "subscribe_button",
+        "label": "Submit button text",
+        "default": "Sign up"
+      },
+      {
+        "type": "richtext",
+        "id": "subscribe_description",
+        "label": "Subheading"
+      }
+    ]
+  }
+
+{% endschema %}

@@ -1,0 +1,21 @@
+.selector-wrapper.styled-dropdown.styled-dropdown--label-inside.row.js, .product-detail__quantity-row.row.with-payment-buttons {
+    display: none;
+}
+.add_multi {
+    width: 100%;
+    background: transparent;
+    color: #000000;
+    border: solid 1px;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    cursor: pointer;
+    margin-top: 30px;
+}
+.add_multi:hover {
+    background: #000000;
+    color: #ffffff;
+}
+.product-detail__price.product-price {
+    display: none;
+}

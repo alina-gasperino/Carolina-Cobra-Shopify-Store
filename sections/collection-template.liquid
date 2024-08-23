@@ -1,0 +1,529 @@
+{% paginate collection.products by section.settings.pagination_limit %}
+
+{%- if section.settings.enable_feature_header and current_page == 1 and collection.products.size > 0 -%}
+  {%- assign show_feature_header = true -%}
+{%- else -%}
+  {%- assign show_feature_header = false -%}
+{%- endif -%}
+
+{%- if show_feature_header -%}
+  {%- for block in section.blocks -%}
+    {%- if block.settings.collection == collection.handle and block.settings.product != blank-%}
+      {%- assign featured_product = all_products[block.settings.product] -%}
+      {% assign overlay_opacity = block.settings.overlay_opacity %}
+      {% assign color_overlay_bg = block.settings.color_overlay_bg %}
+      {%- assign overlay_text = block.settings.color_overlay_text -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+
+
+<div data-section-id="{{ section.id }}" data-section-type="collection-template" class="container container--no-mobile-padding">
+  {% if show_feature_header %}
+  {% style %}
+    {% for block in section.blocks %}
+      {% if block.settings.collection == collection.handle %}
+        .collection-header {
+          {% assign brightness_number = block.settings.collection_colour | color_brightness %}
+          {% if brightness_number < 135 %}{% assign text_color = '#ffffff' %}{% else %}{% assign text_color = '#000000' %}{% endif %}
+
+          background-color: {{ block.settings.collection_colour  }};
+          color: {{ text_color }};
+        }
+      {% endif %}
+    {% endfor %}
+  {% endstyle %}
+  {% endif %}
+
+  {% assign header_image = collection.image %}
+  <header class="page-width collection-header global-border-radius {% if show_feature_header %}standout-collection-bg {% if header_image != blank or featured_product != blank %} collection-header--split{% endif %}{% endif %} {% if featured_product != blank %}collection-header--with-product{% endif %}" role="banner">
+    {% if show_feature_header %}
+
+      {% if featured_product != blank %}
+        <div class="collection-header__container {% if header_image != blank %} collection-header__image-container{% else %} collection-header__container--align-center{% endif %} relative">
+          {% if header_image != blank %}
+            <div class="rimage-background fade-in lazyload desktop-only"
+              data-bgset="{% render 'bgset', image: header_image %}"
+              data-sizes="auto"
+              data-parent-fit="cover">
+              <noscript>
+                <img src="{{ header_image | img_url: '1024x1024' }}" alt="{{ header_image.alt | escape }}" class="rimage-background__image">
+              </noscript>
+            </div>
+
+            <div class="mobile-only">
+              {% render 'responsive-image', image: header_image, nomax: true %}
+            </div>
+          {% endif %}
+
+          {% capture collection_description %}
+          <div class="rte">
+            {{ collection.description }}
+          </div>
+          {% endcapture %}
+
+          {% if header_image != blank %}
+            {% render 'image-overlay',
+              background_color: color_overlay_bg,
+              background_opacity: overlay_opacity,
+              text_color: overlay_text,
+              title: collection.title,
+              text: collection_description,
+              position: 'low-wide',
+              mobile_text_below: true %}
+          {% else %}
+            <div class="collection-header__content-container center">
+              <h1 class="large-title">{{ collection.title }}</h1>
+              {% if collection.description != blank %}
+                <div class="collection-header__description rte {% if header_image == blank and featured_product == blank %}reading-width{% endif %}">
+                  {{ collection.description }}
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="collection-header__container collection-header__product-container">
+          {% assign quickbuy_toggle = settings.quickbuy_buttons_toggle %}
+          {% render 'product-block', product: featured_product, grid_class: ' ', quickbuy: quickbuy_toggle, show_vendor: section.settings.show_vendor %}
+        </div>
+
+      {% else %}
+        {%- if header_image != blank -%}
+        <div class="collection-header__container collection-header__image-container">
+          {% render 'responsive-image', image: header_image, nomax: true %}
+        </div>
+        {%- endif -%}
+
+        <div class="collection-header__container collection-header__content-container {% if header_image == blank %}collection-header__container--padding-bottom{% endif %} center">
+          <h1 class="large-title">{{ collection.title }}</h1>
+          {% if collection.description != blank %}
+            <div class="collection-header__description rte {% if header_image == blank and featured_product == blank %}reading-width{% endif %}">
+              {{ collection.description }}
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+    {% else %}
+
+      <div class="reading-width large-row center">
+        <h1 class="large-title row">{{ collection.title }}</h1>
+        <div class="rte {% if header_image == blank and featured_product == blank %}reading-width{% endif %}">
+          {{ collection.description }}
+        </div>
+      </div>
+    {% endif %}
+  </header>
+
+
+  {%- if collection.products.size > 0 -%}
+    {%- assign show_tags = false -%}
+    {%- if section.settings.show_tag_group_1 -%}
+      {%- assign custom_tag_arr1 = section.settings.tag_group_1_tags | newline_to_br | strip_newlines | split: '<br />' -%}
+      {%- capture filter1_html -%}
+        <div class="grid__item one-quarter large-down--one-third">
+          <div class="filter styled-dropdown styled-dropdown--label-inside">
+            <label for="tag_group_1">{{ section.settings.tag_group_1_name | escape }}</label>
+            <select id="tag_group_1" name="tag_group_1" data-filter-root="/collections/{{ collection.handle }}/" {% if settings.swatch_enabled and section.settings.tag_group_1_name == settings.swatch_option_name %}data-colour-swatch="true"{% endif %}>
+              <option value="">{{ 'collections.filtering.all' | t }}</option>
+              {%- for tag in custom_tag_arr1 -%}
+                {%- unless tag contains 'meta-' -%}
+                  {%- if collection.all_tags contains tag -%}
+                    {%- if custom_tag_arr1 contains tag -%}
+                      {%- assign show_tags = true -%}
+                      <option value="{{ tag | handle }}" data-tag {% if current_tags contains tag %}selected{% endif %}>{{ tag }}</option>
+                    {%- endif -%}
+                  {%- endif -%}
+                {%- endunless -%}
+              {%- endfor -%}
+            </select>
+          </div>
+        </div>
+
+        {%- if settings.swatch_enabled and settings.swatch_method == 'images' and section.settings.tag_group_1_name == settings.swatch_option_name -%}
+        {% style %}
+          {%- for colour in custom_tag_arr1 -%}
+            .bg-{{ colour | handle }} {
+              background-image: url({{ colour | handle | append: '.png' | file_img_url: '40x40', crop: 'center' }});
+              background-clip: padding-box;
+            }
+          {%- endfor -%}
+        {% endstyle %}
+        {%- endif -%}
+      {%- endcapture -%}
+    {%- endif -%}
+
+
+    {%- if section.settings.show_tag_group_2 -%}
+      {%- assign custom_tag_arr2 = section.settings.tag_group_2_tags | newline_to_br | strip_newlines | split: '<br />' -%}
+      {%- capture filter2_html -%}
+        <div class="grid__item one-quarter large-down--one-third">
+          <div class="filter styled-dropdown styled-dropdown--label-inside">
+            <label for="tag_group_2">{{ section.settings.tag_group_2_name | escape }}</label>
+            <select id="tag_group_2" name="tag_group_2" data-filter-root="/collections/{{ collection.handle }}/" {% if settings.swatch_enabled and section.settings.tag_group_2_name == settings.swatch_option_name %}data-colour-swatch="true"{% endif %}>
+              <option value="">{{ 'collections.filtering.all' | t }}</option>
+              {%- for tag in custom_tag_arr2 -%}
+                {%- unless tag contains 'meta-' -%}
+                  {%- if collection.all_tags contains tag -%}
+                    {%- if custom_tag_arr2 contains tag -%}
+                      {%- assign show_tags = true -%}
+                      <option value="{{ tag | handle }}" data-tag {% if current_tags contains tag %}selected{% endif %}>{{ tag }}</option>
+                    {%- endif -%}
+                  {%- endif -%}
+                {%- endunless -%}
+              {%- endfor -%}
+            </select>
+          </div>
+        </div>
+        {%- if settings.swatch_enabled and settings.swatch_method == 'images' and section.settings.tag_group_2_name == settings.swatch_option_name -%}
+        <style>
+          {%- for colour in custom_tag_arr2 -%}
+            .bg-{{ colour | handle }} {
+              background-image: url({{ colour | handle | append: '.png' | file_img_url: '40x40', crop: 'center' }});
+              background-clip: padding-box;
+            }
+          {%- endfor -%}
+        </style>
+        {%- endif -%}
+      {%- endcapture -%}
+    {%- endif -%}
+
+
+    {% if section.settings.show_ungrouped_tags and collection.handle and collection.all_tags.size > 0 %}
+      {% capture filter_html %}
+        <div class="grid__item one-quarter large-down--one-third">
+          <div class="filter styled-dropdown styled-dropdown--label-inside">
+            <label for="ungrouped_tags">{{ 'collections.filtering.filter' | t }}</label>
+            <select id="ungrouped_tags" name="ungrouped_tags" data-filter-root="/collections/{{ collection.handle }}/">
+              <option value="">{{ 'collections.filtering.all' | t }}</option>
+              {%- for tag in collection.all_tags -%}
+                {%- unless tag contains 'meta-' or custom_tag_arr1 contains tag or custom_tag_arr2 contains tag -%}
+                  {%- assign show_tags = true -%}
+                  <option value="{{ tag | handle }}" data-tag {% if current_tags contains tag %}selected{% endif %}>{{ tag }}</option>
+                {%- endunless -%}
+              {%- endfor -%}
+            </select>
+          </div>
+        </div>
+      {% endcapture %}
+    {% endif %}
+
+    {% if show_tags or section.settings.show_sort_by %}
+    <div class="page-width collection-filters-row">
+      <div class="collection-filter-control {% if section.settings.show_sort_by and show_tags %}collection-filter-control--two-buttons{% endif %}">
+        {% if section.settings.show_sort_by %}
+          <button class="btn--plain" data-collection-filter-reveal="sort">{{ 'collections.sorting.title' | t }}</button>
+        {% endif %}
+        {% if show_tags %}
+          <button class="btn--plain" data-collection-filter-reveal="filters">{{ 'collections.filtering.filter' | t }}</button>
+        {% endif %}
+      </div>
+
+      {%- unless collection.url contains "/vendors" -%}
+        <div class="collection-filters-container global-border-radius {% if show_feature_header and section.settings.feature_header_filter_overlap %}collection-filters-container--overlap{% endif %}">
+          <div class="grid">
+            {% if show_tags %}
+              <div class="collection-filters grid__item four-fifths large-down--three-quarters">
+                <div class="grid">
+                  {% if filter_html contains 'data-tag' %}
+                    {{ filter_html }}
+                  {% endif %}
+
+                  {% if filter1_html contains 'data-tag' %}
+                    {{ filter1_html }}
+                  {% endif %}
+
+                  {% if filter2_html contains 'data-tag' %}
+                    {{ filter2_html }}
+                  {% endif %}
+                </div>
+              </div>
+            {% endif %}
+
+            {% if section.settings.show_sort_by %}
+              <div class="collection-sort grid__item one-fifth large-down--one-quarter">
+                <div class="styled-dropdown styled-dropdown--label-inside">
+                  <label class="dropdown-label" for="sort_by">{{ 'collections.sorting.title' | t }}</label>
+                  {% assign current_sort_by = collection.sort_by | default: collection.default_sort_by %}
+                  <select name="sort_by" id="sort_by">
+                    {% if section.settings.show_featured %}
+                    <option value="manual" {% if current_sort_by == 'manual' %}selected{% endif %}>{{ 'collections.sorting.featured' | t }}</option>
+                    {% endif %}
+                    <option value="best-selling" {% if current_sort_by == 'best-selling' %}selected{% endif %}>{{ 'collections.sorting.best_selling' | t }}</option>
+                    <option value="title-ascending" {% if current_sort_by == 'title-ascending' %}selected{% endif %}>{{ 'collections.sorting.az' | t }}</option>
+                    <option value="title-descending" {% if current_sort_by == 'title-descending' %}selected{% endif %}>{{ 'collections.sorting.za' | t }}</option>
+                    <option value="price-ascending" {% if current_sort_by == 'price-ascending' %}selected{% endif %}>{{ 'collections.sorting.price_ascending' | t }}</option>
+                    <option value="price-descending" {% if current_sort_by == 'price-descending' %}selected{% endif %}>{{ 'collections.sorting.price_descending' | t }}</option>
+                    <option value="created-descending" {% if current_sort_by == 'created-descending' %}selected{% endif %}>{{ 'collections.sorting.date_descending' | t }}</option>
+                    <option value="created-ascending" {% if current_sort_by == 'created-ascending' %}selected{% endif %}>{{ 'collections.sorting.date_ascending' | t }}</option>
+                  </select>
+                </div>
+              </div>
+            {% endif %}
+          </div>
+
+          <button class="btn--plain icon feather-icon collection-filters-container__close" aria-label="{{ 'general.accessibility_labels.close' | t | escape }}">{% render 'feather-x' %}</button>
+        </div>
+      {% endunless %}
+    </div>
+    {% endif %}
+  {% endif %}
+
+  <div class="page-width collection-product-list" data-ajax-products="{% if section.settings.ajax_products and current_page == 1 %}true{% else %}false{% endif %}">
+    <div class="grid-flex large-row">
+      {%- assign grid_class = 'one-quarter' -%}
+      {%- if section.settings.grid == 2 -%}
+        {%- assign grid_class = 'one-half' -%}
+      {%- elsif section.settings.grid == 3 -%}
+        {%- assign grid_class = 'one-third' -%}
+      {%- elsif section.settings.grid == 5 -%}
+        {%- assign grid_class = 'one-fifth' -%}
+      {%- endif -%}
+
+      {%- assign grid_mobile_class = 'one-half' -%}
+      {%- if section.settings.grid_mobile == '1' -%}
+        {%- assign grid_mobile_class = 'one-whole' -%}
+      {%- endif -%}
+
+      {% capture grid_class_list %}{{ grid_class }} small-down--{{ grid_mobile_class }} grid-flex__item {% endcapture %}
+
+      {% for product in collection.products %}
+        {% assign quickbuy_toggle = settings.quickbuy_buttons_toggle %}
+        {% render 'product-block', quickbuy: quickbuy_toggle, product: product, grid_class: grid_class_list, show_vendor: section.settings.show_vendor %}
+
+      {% else %}
+        {% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0 %}
+          {% for i in (1..8) %}
+            <div class="{{ grid_class_list }}">
+              <a href="#">
+                {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+                {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg placeholder-svg--small' }}
+              </a>
+
+              <p>
+                <a href="#">{{ 'homepage.onboarding.product_title' | t }}</a>
+              </p>
+
+              <p>
+                <span class="theme-money">{{ 1999 | money }}</span>
+              </p>
+            </div>
+          {% endfor %}
+        {% else %}
+          <div class="grid__item one-whole center">
+            <p>{{ 'collections.general.no_matches' | t }}</p>
+          </div>
+        {% endif %}
+
+      {% endfor %}
+    </div>
+
+    {% if paginate.pages > 1 %}
+      {% render 'pagination', paginate: paginate %}
+    {% endif %}
+  </div>
+</div>
+{% endpaginate %}
+
+
+{% schema %}
+  {
+    "name": "Collection pages",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Feature header"
+      },
+      {
+        "type": "paragraph",
+        "content": "Use the 'Add Collection' content setting to assign featured products and a unique background colour per collection. You will need to navigate to the selected collection to see the changes. [Learn more](https://cleancanvas.co.uk/support/boost-settings-collection-blocks)"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_feature_header",
+        "label": "Enable Feature header",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "feature_header_filter_overlap",
+        "label": "Enable filter row overlap",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Layout"
+      },
+      {
+        "type": "range",
+        "id": "grid",
+        "label": "Products per row desktop",
+        "min": 2,
+        "max": 5,
+        "step": 1,
+        "default": 4
+      },
+      {
+        "type": "select",
+        "id": "grid_mobile",
+        "label": "Products per row mobile",
+        "options": [
+          { "value": "1", "label": "1" },
+          { "value": "2", "label": "2" }
+        ],
+        "default": "2"
+      },
+      {
+        "type": "range",
+        "id": "pagination_limit",
+        "min": 8,
+        "max": 50,
+        "step": 1,
+        "label": "Products per page",
+        "default": 12
+      },
+      {
+        "type": "checkbox",
+        "id": "ajax_products",
+        "label": "Filter and sort collections without loading a new page",
+        "default": true,
+        "info": "Some apps require this to be disabled"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_vendor",
+        "label": "Show product vendor",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Filters"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_sort_by",
+        "label": "Show 'sort by' drop down",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_ungrouped_tags",
+        "label": "Show ungrouped tags",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_featured",
+        "label": "Show 'Featured' sort option",
+        "default": false,
+        "info": "Add your manually sorted order to the sort options"
+      },
+      {
+        "type": "header",
+        "content": "Tag groups"
+      },
+      {
+        "type": "paragraph",
+        "content": "Add up to 2 tag groups to allow customers to filter your products. [Learn more](https://cleancanvas.co.uk/support/boost-settings-tag-groups)"
+      },
+      {
+        "type": "header",
+        "content": "Tag group 1"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_tag_group_1",
+        "label": "Show",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "tag_group_1_name",
+        "label": "Name"
+      },
+      {
+        "type": "textarea",
+        "id": "tag_group_1_tags",
+        "label": "Tag list",
+        "info": "Case-sensitive. One per line."
+      },
+      {
+        "type": "header",
+        "content": "Tag group 2"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_tag_group_2",
+        "label": "Show",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "tag_group_2_name",
+        "label": "Name"
+      },
+      {
+        "type": "textarea",
+        "id": "tag_group_2_tags",
+        "label": "Tag list",
+        "info": "Case-sensitive. One per line."
+      }
+    ],
+    "blocks": [
+      {
+        "type": "collection",
+        "name": "Collection",
+        "settings": [
+          {
+            "type": "paragraph",
+            "content": "Selecting a collection will show its collection image on the left, and the featured product on the right."
+          },
+          {
+            "type": "collection",
+            "id": "collection",
+            "label": "Collection"
+          },
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Featured product"
+          },
+          {
+            "type": "color",
+            "id": "collection_colour",
+            "label": "Background color",
+            "default": "#43467F"
+          },
+          {
+            "type": "header",
+            "content": "Overlay",
+            "info": "Shown over the collection featured image when a featured product is selected."
+          },
+          {
+            "type": "color",
+            "id": "color_overlay_bg",
+            "label": "Background color",
+            "default": "#ffffff"
+          },
+          {
+            "type": "range",
+            "id": "overlay_opacity",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "label": "Background opacity",
+            "default": 10,
+            "unit": "%"
+          },
+          {
+            "type": "color",
+            "id": "color_overlay_text",
+            "label": "Text color",
+            "default": "#333333"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,2396 @@
+<div data-section-type="nested-sections">
+  {% for block in section.blocks %}
+    {% if block.type == 'rich-text' %}
+      <div class="shopify-section section-rich-text" {{ block.shopify_attributes }}>
+<section class="relative container container--no-mobile-padding large-row section-{{ block.id }}" data-section-id="{{ block.id }}" data-nested-section-type="rich-text-section">
+  {% style %}
+    .section-{{ block.id }} .rich-text-section {
+      background-color: {{ block.settings.color_bg }};
+      color: {{ block.settings.color_text }};
+    }
+    .section-{{ block.id }} .rich-text-section .large-title {
+      color: {{ block.settings.color_title }};
+    }
+  {% endstyle%}
+  <div class="page-width rich-text-section large-section global-border-radius">
+    <div class="{% if block.settings.full_width == false %}reading-width{% endif %} text-center">
+      {% if block.settings.title != blank %}
+        <h2 class="{% if block.settings.enlarge_title %}giant-title {% else %}large-title {% endif %} rich-text-section__title">{{ block.settings.title | escape }}</h2>
+      {% endif %}
+
+      {% if block.settings.text != blank %}
+        <div class="rte {% if block.settings.enlarge_text %}large-text{% endif %}">
+          {{ block.settings.text }}
+        </div>
+      {% endif %}
+
+      {% if block.settings.button_label != blank %}
+
+        {%- assign bg_alpha = block.settings.color_bg | color_extract: 'alpha' -%}
+        {%- assign link_inherit_color = false -%}
+        {%- if block.settings.url_style == 'link_style' -%}
+          {%- if bg_alpha > 0 and block.settings.color_bg != settings.color_body_background -%}
+            {%- assign link_inherit_color = true -%}
+          {%- endif -%}
+        {%- endif -%}
+
+        <div class="rich-text-section__btn-row">
+          <a class="{% if block.settings.url_style == 'button_1' %}btn btn--small btn--primary{% elsif block.settings.url_style == 'button_2' %}btn btn--small btn--secondary{% else %}standard-link {% if link_inherit_color == true %}standard-link--inherit-color{% endif %}{% endif %}" href="{{ block.settings.button_link | escape }}">{{ block.settings.button_label | escape }}</a>
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+</section>
+
+</div>
+
+    {% elsif block.type == 'image-with-text' %}
+      <div class="shopify-section section-image-with-text" {{ block.shopify_attributes }}>
+<section class="relative container container--no-mobile-padding large-row section-{{ block.id }}" data-section-id="{{ block.id }}" data-nested-section-type="image-with-text">
+  {% style %}
+    .section-{{ block.id }} .image-with-text {
+      background-color: {{ block.settings.color_bg }};
+      color: {{ block.settings.color_text }};
+    }
+
+    .section-{{ block.id }} .image-with-text__image-size {
+      padding: {{ block.settings.image_size }}px;
+    }
+
+    {% if block.settings.image_size == '120' %}
+      @media screen and (max-width: 1000px) and (min-width: 768px) {
+        .section-{{ block.id }} .image-with-text__image-size {
+          padding: {{ block.settings.image_size | divided_by: 2 }}px;
+        }
+      }
+      @media screen and (max-width: 580px) {
+        .section-{{ block.id }} .image-with-text__image-size {
+          padding: {{ block.settings.image_size | divided_by: 2 }}px;
+        }
+      }
+    {% endif %}
+  {% endstyle %}
+
+  <div class="page-width image-with-text flex global-border-radius {% if block.settings.image_position == 'right' %} image-with-text--reverse{% endif %} {% if block.settings.image_size == '0' %} image-with-text--full{% endif %}">
+
+    <div class="one-half small-down--one-whole relative image-with-text__image">
+      <div class="image-with-text__image-size {% unless block.settings.image_size == '0' %}image-with-text__mobile-radius{% endunless %}">
+        {% if block.settings.image_link != blank %}<a href="{{ block.settings.image_link }}">{% endif %}
+        {% if block.settings.image == blank %}
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+        {% else %}
+          {% render 'responsive-image', image: block.settings.image, nomax: true %}
+        {% endif %}
+        {% if block.settings.image_link != blank %}</a>{% endif %}
+      </div>
+    </div>
+
+    <div class="one-half small-down--one-whole relative image-with-text__content">
+      <div class="{%- if block.settings.text_alignment == 'center' -%}center{%- endif -%}">
+        <h2 class="image-with-text__title {% if block.settings.enlarge_title %} giant-title{% else %} large-title{% endif %}">{{ block.settings.title }}</h2>
+        {% if block.settings.text %}
+          <div class="image-with-text__text {% if block.settings.enlarge_text %}large-text{% endif %}">{{ block.settings.text }}</div>
+        {% endif %}
+
+        {% if block.settings.button_label != blank %}
+          {%- assign inherit_colour = false -%}
+          {%- if block.settings.url_style == 'link_style' -%}
+            {%- assign alpha = block.settings.color_bg | color_extract: 'alpha' -%}
+            {%- if alpha > 0 and block.settings.color_bg != settings.color_body_background -%}
+              {%- assign inherit_colour = true -%}
+            {%- endif -%}
+          {%- endif -%}
+
+          <a class="image-with-text__link {% if block.settings.url_style == 'button_1' %}btn btn--small btn--primary{% elsif block.settings.url_style == 'button_2' %}btn btn--small btn--secondary{% else %}standard-link {% if inherit_colour %}standard-link--inherit-color{% endif %}{% endif %}" href="{{ block.settings.button_link }}">
+            {{ block.settings.button_label }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+    {% elsif block.type == 'background-video' %}
+      <div class="shopify-section section-background-video" {{ block.shopify_attributes }}><section id="section-{{ block.id }}" class="background-video container container--no-mobile-padding large-row section-{{ block.id }}" data-section-id="{{ block.id }}" data-nested-section-type="background-video">
+  {% style %}
+    .section-{{ block.id }} .rimage-outer-wrapper,
+    .section-{{ block.id }} .placeholder-container,
+    .section-{{ block.id }} .video-container {
+      height: {{ block.settings.height_mobile }}px;
+    }
+    @media (min-width: 840px) {
+      .section-{{ block.id }} .rimage-outer-wrapper,
+      .section-{{ block.id }} .placeholder-container,
+      .section-{{ block.id }} .video-container {
+        height: {{ block.settings.height_desktop }}px;
+      }
+    }
+
+    .section-{{ block.id }} .overlay {
+      top: {{ block.settings.overlay_position_y }}%;
+      left: {{ block.settings.overlay_position_x }}%;
+    }
+
+    {% for i in (1..2) %}
+      {% capture position_x %}label_position_x_{{ i }}{% endcapture %}
+      {% capture position_y %}label_position_y_{{ i }}{% endcapture %}
+
+      .section-{{ block.id }} .image-product-label-{{ i }} {
+        top: {{ block.settings[position_y] }}%;
+        left: {{ block.settings[position_x] }}%;
+      }
+    {% endfor %}
+  {% endstyle %}
+
+  <div class="page-width">
+    {% if block.settings.video != blank %}
+      <div class="full-width relative avoid-overlaps global-border-radius global-border-radius--not-extra-small">
+        <div class="video-container video-container--background avoid-overlaps__mobile-container global-border-radius global-border-radius--not-extra-small"
+          data-video-url="{{ block.settings.video | escape }}"
+          data-video-autoplay="true"
+          data-video-loop="true">
+          <div class="video-container__video"></div>
+          {% if block.settings.cover_image != blank %}
+            <div class="video-container__fallback rimage-outer-wrapper rimage-background lazyload fade-in global-border-radius global-border-radius--not-extra-small"
+              data-bgset="{% render 'bgset', image: block.settings.cover_image %}"
+              data-sizes="auto"
+              data-parent-fit="cover"
+              style="background-position: {{ block.settings.image_position }}">
+              <noscript>
+                <div class="rimage-wrapper" style="padding-top:{{ 1 | divided_by: block.settings.cover_image.aspect_ratio | times: 100 }}%">
+                  <img src="{{ block.settings.cover_image | img_url: '1024x1024' }}" alt="{{ block.settings.cover_image.alt | escape }}" class="rimage__image">
+                </div>
+              </noscript>
+            </div>
+          {% else %}
+          <div class="video-container__fallback rimage-outer-wrapper rimage-background lazyload fade-in global-border-radius global-border-radius--not-extra-small">
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+          {% endif %}
+
+          {% for i in (1..2) %}
+            {% capture current_label %}product_id_{{ i }}{% endcapture %}
+            {% capture chevron_position %}chevron_position_{{ i }}{% endcapture %}
+
+            {% if block.settings[current_label] != blank %}
+              {% assign product_label = all_products[block.settings[current_label]] %}
+              {% capture current_number %}{{ i }}{% endcapture %}
+              {% assign quickbuy_toggle = settings.quickbuy_labels_toggle %}
+              {% render 'image-product-label',
+                          product_label: product_label,
+                          current_number: current_number,
+                          show_chevron: block.settings.show_chevron,
+                          chevron: block.settings[chevron_position],
+                          quickbuy: quickbuy_toggle,
+                          color_bg: block.settings.color_label_background,
+                          color_text: block.settings.color_label_text %}
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        {% render 'image-overlay',
+            background_color: block.settings.color_overlay_bg,
+            background_opacity: block.settings.overlay_opacity,
+            text_color: block.settings.color_overlay_text,
+            title: block.settings.overlay_title,
+            enlarge_title: block.settings.enlarge_title,
+            text: block.settings.overlay_text,
+            enlarge_text: block.settings.enlarge_text,
+            url: block.settings.overlay_url_1,
+            url_2: block.settings.overlay_url_2,
+            url_text: block.settings.overlay_url_text_1,
+            url_text_2: block.settings.overlay_url_text_2,
+            url_style: block.settings.overlay_url_style,
+            mobile_text_below: block.settings.mobile_text_below,
+            extra_large_text: true %}
+      </div>
+    {% else %}
+      <div class="container container--no-mobile-padding">{{ 'homepage.onboarding.no_content' | t }}</div>
+    {% endif %}
+  </div>
+</section>
+
+
+</div>
+
+    {% elsif block.type == 'image-with-text-overlay' %}
+      <div class="shopify-section section-image-with-text-overlay" {{ block.shopify_attributes }}><section class="container container--no-mobile-padding large-row full-width-image full-width-background section-{{ block.id }}" data-section-id="{{ block.id }}" data-nested-section-type="full-width-image">
+  {% style %}
+    {%- if block.settings.height == 'fixed' -%}
+      .section-{{ block.id }} .avoid-overlaps__mobile-container,
+      .section-{{ block.id }} .rimage-outer-wrapper {
+        height: {{ block.settings.height_mobile }}px;
+      }
+
+      @media (min-width: 840px) {
+        .section-{{ block.id }} .avoid-overlaps__mobile-container,
+        .section-{{ block.id }} .rimage-outer-wrapper {
+          height: {{ block.settings.height_desktop }}px;
+        }
+      }
+    {%- endif -%}
+    .section-{{ block.id }} .overlay {
+      top: {{ block.settings.overlay_position_y }}%;
+      left: {{ block.settings.overlay_position_x }}%;
+    }
+
+    {% for i in (1..2) %}
+      {% capture position_x %}label_position_x_{{ i }}{% endcapture %}
+      {% capture position_y %}label_position_y_{{ i }}{% endcapture %}
+
+      .section-{{ block.id }} .image-product-label-{{ i }} {
+        top: {{ block.settings[position_y] }}%;
+        left: {{ block.settings[position_x] }}%;
+      }
+    {% endfor %}
+  {% endstyle %}
+
+  <div class="page-width">
+    <div class="full-width relative avoid-overlaps global-border-radius global-border-radius--not-extra-small">
+      <div class="avoid-overlaps__mobile-container global-border-radius global-border-radius--not-extra-small">
+        {% if block.settings.image_link != blank %}<a href="{{ block.settings.image_link }}">{% endif %}
+        {% if block.settings.image == blank %}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {% else %}
+          <div class="rimage-outer-wrapper rimage-background lazyload fade-in"
+            data-bgset="{% render 'bgset', image: block.settings.image %}"
+            data-sizes="auto"
+            data-parent-fit="cover"
+            style="background-position: {{ block.settings.image_position }}">
+            <div class="rimage-wrapper" style="padding-top:{{ 1 | divided_by: block.settings.image.aspect_ratio | times: 100 }}%">
+              <noscript>
+                <img src="{{ block.settings.image | img_url: '1024x1024' }}" alt="{{ block.settings.image.alt | escape }}" class="rimage__image">
+              </noscript>
+            </div>
+          </div>
+        {% endif %}
+        {% if block.settings.image_link != blank %}</a>{% endif %}
+
+        {% for i in (1..2) %}
+          {% capture current_label %}product_id_{{ i }}{% endcapture %}
+          {% capture chevron_position %}chevron_position_{{ i }}{% endcapture %}
+
+          {% if block.settings[current_label] != blank %}
+            {% assign product_label = all_products[block.settings[current_label]] %}
+            {% capture current_number %}{{ i }}{% endcapture %}
+            {% assign quickbuy_toggle = settings.quickbuy_labels_toggle %}
+            {% render 'image-product-label',
+                        product_label: product_label,
+                        current_number: current_number,
+                        show_chevron: block.settings.show_chevron,
+                        chevron: block.settings[chevron_position],
+                        quickbuy: quickbuy_toggle,
+                        color_bg: block.settings.color_label_background,
+                        color_text: block.settings.color_label_text %}
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      {% render 'image-overlay',
+        background_color: block.settings.color_overlay_bg,
+        background_opacity: block.settings.overlay_opacity,
+        text_color: block.settings.color_overlay_text,
+        title: block.settings.overlay_title,
+        enlarge_title: block.settings.enlarge_title,
+        text: block.settings.overlay_text,
+        enlarge_text: block.settings.enlarge_text,
+        url: block.settings.overlay_url_1,
+        url_2: block.settings.overlay_url_2,
+        url_text: block.settings.overlay_url_text_1,
+        url_text_2: block.settings.overlay_url_text_2,
+        url_style: block.settings.overlay_url_style,
+        mobile_text_below: block.settings.mobile_text_below,
+        extra_large_text: true %}
+
+    </div>
+  </div>
+</section>
+
+</div>
+
+    {% elsif block.type == 'video' %}
+      <div class="shopify-section section-video" {{ block.shopify_attributes }}><section id="section-id-{{ block.id }}" class="large-row container container--no-mobile-padding section-{{ block.id }}" data-section-id="{{ block.id }}"  data-nested-section-type="video">
+  {% style %}
+    .section-{{ block.id }} .video-container__play.feather-icon svg {
+      stroke: {{ block.settings.color_overlay_text }};
+    }
+
+    .section-{{ block.id }} .overlay {
+      top: {{ block.settings.overlay_position_y }}%;
+      left: {{ block.settings.overlay_position_x }}%;
+    }
+  {% endstyle %}
+
+  <div class="page-width relative">
+
+    {% if block.settings.video_url != blank %}
+      <div class="video-container global-border-radius global-border-radius--not-extra-small video-container--image video-container--modal-mobile avoid-overlaps"
+        data-video-id="{{ block.settings.video_url.id }}"
+        data-video-url="{{ block.settings.video_url.url }}"
+        data-video-type="{{ block.settings.video_url.type }}"
+        data-video-autoplay="false"
+        data-video-loop="false">
+        <div class="avoid-overlaps__mobile-container video-container__player">
+          <a class="video-container__stop" href="#" aria-label="{{ 'general.accessibility_labels.video_stop' | t | escape }}">{% render 'icon-close' %}</a>
+          <div class="video-container__video"></div>
+          <div class="video-container__cover">
+            {%- if block.settings.cover_image == blank -%}
+              <div class="placeholder-image video-container__cover">
+                {{- 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' -}}
+              </div>
+            {%- else -%}
+              <div class="rimage-outer-wrapper rimage-background lazyload fade-in"
+                  data-bgset="{% render 'bgset', image: block.settings.cover_image %}"
+                  data-sizes="auto"
+                  data-parent-fit="cover"
+                  style="background-position: {{ block.settings.image_position }}">
+                <noscript>
+                  <div class="rimage-wrapper" style="padding-top:{{ 1 | divided_by: block.settings.cover_image.aspect_ratio | times: 100 }}%">
+                    <img src="{{ block.settings.cover_image | img_url: '1024x1024' }}" alt="{{ block.settings.cover_image.alt | escape }}" class="rimage__image">
+                  </div>
+                </noscript>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+
+        {% render 'image-overlay',
+            background_color: block.settings.color_overlay_bg,
+            background_opacity: block.settings.overlay_opacity,
+            text_color: block.settings.color_overlay_text,
+            title: block.settings.overlay_title,
+            enlarge_title: block.settings.enlarge_title,
+            text: block.settings.overlay_text,
+            enlarge_text: block.settings.enlarge_text,
+            mobile_text_below: block.settings.mobile_text_below,
+            video_button: true,
+            extra_large_text: true %}
+      </div>
+    {% else %}
+      <div class="row-double-space video-section center">{{ 'homepage.onboarding.no_content' | t }}</div>
+    {% endif %}
+  </div>
+</section>
+
+</div>
+
+    {% elsif block.type == 'custom-html-section' %}
+      <div class="shopify-section " {{ block.shopify_attributes }}><section class="relative container">
+  <div class="page-width">
+    {{ block.settings.custom_html }}
+  </div>
+</section>
+
+</div>
+
+    {% elsif block.type == 'map-section' %}
+      <div class="shopify-section index-section index-map-section" {{ block.shopify_attributes }}>{% assign display_map = false %}
+{%- assign onboarding = false -%}
+{%- assign bg_image = block.settings.background_image -%}
+
+{%- if block.settings.api_key == blank and bg_image == blank -%}
+  {%- assign onboarding = true -%}
+{%- endif -%}
+{%- if block.settings.api_key != blank and block.settings.map_address -%}
+  {%- assign display_map = true -%}
+{%- endif -%}
+
+
+<div class="relative container container--no-mobile-padding large-row">
+  {% style %}
+    .section-{{ block.id }} .map-section__background-wrapper {
+      height: {{ block.settings.height_mobile }}px;
+    }
+
+    @media (min-width: 840px) {
+      .section-{{ block.id }} .map-section__background-wrapper {
+        height: {{ block.settings.height_desktop }}px;
+      }
+    }
+
+    .section-{{ block.id }} .map-section__content {
+      background-color: {{ block.settings.color_overlay_bg }};
+      color: {{ block.settings.color_overlay_text }};
+    }
+
+    {% if bg_image.src != blank %}
+    .section-{{ block.id }} .map-section__image {
+      background-position: {{ block.settings.background_image_position }};
+    }
+    {% endif %}
+  {% endstyle %}
+
+  <section class="page-width map-section section-{{ block.id }}
+      {% if display_map %}map-section--display-map{% endif %}
+      {% if onboarding == true %}map-section--onboarding{% endif %}"
+      data-section-id="{{ block.id }}"
+      data-nested-section-type="map"
+      data-api-key="{{ block.settings.api_key }}"
+      data-map-style="{{ block.settings.map_style }}">
+    <div class="map-section__background-wrapper global-border-radius map-section__wrapper">
+      {% if bg_image.src != blank %}
+        <div class="map-section__image">
+          <div class="rimage-background fade-in lazyload"
+                data-bgset="{% render 'bgset', image: bg_image %}"
+                data-sizes="auto"
+                data-parent-fit="cover"
+                style="background-position: {{ block.settings.image_position }}">
+            <noscript>
+              <img src="{{ bg_image | img_url: '1024x1024' }}" alt="{{ bg_image.alt | escape }}" class="rimage-background__image">
+            </noscript>
+          </div>
+        </div>
+      {% elsif onboarding == true %}
+        <div class="placeholder-background">
+          {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+        </div>
+      {% endif %}
+      {% if display_map %}
+        <div class="map-section__container map-section__map-container"
+              id="Map-{{ block.id }}"
+             data-address-setting="{{ block.settings.map_address | escape }}">
+        </div>
+        <div class="map-section__overlay" data-map-overlay></div>
+      {% endif %}
+    </div>
+    <div class="page-width">
+      <div class="map-section__content-wrapper reading-width">
+        <div class="map-section__content global-border-radius">
+          {% if block.settings.heading != blank %}
+            <h3 class="map-section__title {% if block.settings.enlarge_title %} giant-title{% else %} large-title{% endif %}">{{ block.settings.heading | escape }}</h3>
+          {% endif %}
+          {% if block.settings.address != blank %}
+            <div class="rte {% if block.settings.enlarge_text %} large-text{% endif %}">{{ block.settings.address }}</div>
+            {% if block.settings.map_address != blank and block.settings.button_text != blank %}
+              {%- assign bg_alpha = block.settings.color_overlay_bg | color_extract: 'alpha' -%}
+              {%- assign link_inherit_color = false -%}
+              {%- if block.settings.url_style == 'link_style' -%}
+                {%- if bg_alpha > 0 and block.settings.color_overlay_bg != settings.color_body_background -%}
+                  {%- assign link_inherit_color = true -%}
+                {%- endif -%}
+              {%- endif -%}
+
+              <a href="https://maps.google.com?daddr={{ block.settings.map_address | escape }}"
+                class="{% if block.settings.url_style == 'button_1' %}btn btn--primary{% elsif block.settings.url_style == 'button_2' %}btn btn--secondary{% else %}standard-link {% if link_inherit_color == true %}standard-link--inherit-color{% endif %}{% endif %}"
+                target="_blank"
+              >
+                {% if block.settings.show_pin %}
+                  <span class="feather-icon">{% render 'feather-pin' %}</span>
+                {% endif %}
+                {% if block.settings.button_text %}
+                  <span>{{ block.settings.button_text | escape }}</span>
+                {% endif %}
+              </a>
+            {% endif %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+</div>
+
+    {% elsif block.type == 'newsletter-section' %}
+      <div class="shopify-section section-newsletter" {{ block.shopify_attributes }}>
+<section class="container container--no-mobile-padding large-row section-{{ block.id }}" data-section-id="{{ block.id }}" data-nested-section-type="subscribe">
+  {% style %}
+    .section-{{ block.id }} .subscribe-section {
+      background-color: {{ block.settings.section_background_colour }};
+      color: {{ block.settings.section_text_colour }};
+    }
+
+    .section-{{ block.id }} .subscribe-form__inputs .input-wrapper label {
+      color: {{ block.settings.section_text_colour | color_modify: 'alpha', 0.7 }};
+    }
+
+    .section-{{ block.id }} .input-wrapper {
+      border-bottom-color: {{ block.settings.section_text_colour | color_modify: 'alpha', 0.3 }};
+    }
+  {% endstyle %}
+
+  <div class="subscribe-section large-section page-width global-border-radius">
+    <div class="reading-width subscribe-content">
+      <h2 class="subscribe-content__title {% if block.settings.enlarge_title %} giant-title{% else %} large-title{% endif %}">{{ block.settings.title }}</h2>
+      {% if block.settings.section_subtitle != blank %}
+        <div class="{% if block.settings.enlarge_text %}large-text{% endif %} rte">{{ block.settings.section_subtitle }}</div>
+      {% endif %}
+    </div>
+    <div class="reading-width subscribe-form">
+      {% form 'customer' %}
+        {% if form.posted_successfully? %}
+          <div class="subscribe-form__response subscribe-form__response--success">
+            <h4>{{ 'general.newsletter.success' | t }}</h4>
+          </div>
+        {% else %}
+          {% if form.errors %}
+            <div class="subscribe-form__response">
+              {% for field in form.errors %}
+              <p class="error-message">{{ field | capitalize }} - {{ form.errors.messages[field] }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
+          <input type="hidden" id="contact_tags" name="contact[tags]" value="prospect,newsletter"/>
+          <div class="subscribe-form__inputs">
+            <div class="input-wrapper grid__item two-thirds small-down--one-whole">
+              <label class="subscribe-form__label" for="mailinglist_email">{{ 'layout.signup.email' | t }}</label>
+              <input type="email" required class="subscribe-form__email required grid__item one-third" value="" id="mailinglist_email" name="contact[email]" />
+            </div>
+            <div class="grid__item one-third small-down--one-whole">
+              <button class="btn {% if block.settings.button_style == 'button_1' %} btn--primary{% else %} btn--secondary{% endif %} subscribe-form__submit" type="submit">{{ 'layout.signup.submit' | t | escape }}</button>
+            </div>
+          </div>
+        {% endif %}
+      {% endform %}
+    </div>
+  </div>
+</section>
+
+</div>
+
+    {% elsif block.type == 'featured-collection' %}
+      <div class="shopify-section section-featured-collection" {{ block.shopify_attributes }}>{%- assign collection = collections[block.settings.collection] -%}
+{%- if block.settings.enable_carousel == true -%}
+  {%- assign product_count = 12 -%}
+{%- else -%}
+  {%- assign product_count = block.settings.row_count | times: block.settings.grid -%}
+{%- endif -%}
+
+<section class="relative container large-row featured-collection" data-section-id="{{ block.id }}" data-nested-section-type="featured-collection">
+  <div class="page-width">
+    {%- if block.settings.title != blank or block.settings.link_text != blank or block.settings.enable_carousel == true -%}
+    <div class="large-row ">
+
+      <div class="text-center">
+        {% if block.settings.title != blank %}
+          <h2 class="featured-collection--title {% if block.settings.enlarge_title %}giant-title{% else %}large-title{% endif%}">{{ block.settings.title | escape }}</h2>
+        {% endif %}
+
+        {% if block.settings.link_text != blank %}
+          <a class="standard-link" href="{{ collection.url }}">{{ block.settings.link_text | escape }}</a>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+
+    <div class="product-carousel-peek">
+
+      {%- if block.settings.enable_carousel == true -%}
+        <div class="featured-collection-controls featured-collection-controls--prev">
+          <button class="btn--plain prev icon feather-icon" aria-label="{{ 'general.accessibility_labels.previous' | t | escape }}">{% render 'feather-arrow-left' %}</button>
+        </div>
+      {%- endif -%}
+
+      <div class="grid-flex" {%- if block.settings.enable_carousel == true -%}data-carousel-enabled data-slides-per-row="{{ block.settings.grid }}"{%- endif -%}>
+        {%- assign grid_class = 'one-quarter' -%}
+        {%- if block.settings.grid == 2 -%}
+          {%- assign grid_class = 'one-half' -%}
+        {%- elsif block.settings.grid == 3 -%}
+          {%- assign grid_class = 'one-third' -%}
+        {%- elsif block.settings.grid == 5 -%}
+          {%- assign grid_class = 'one-fifth' -%}
+        {%- endif -%}
+
+        {%- if block.settings.grid_mobile == "2" -%}
+          {%- assign mobile_grid_class = 'small-down--one-half' -%}
+        {%- else -%}
+          {%- assign mobile_grid_class = 'small-down--one-whole' -%}
+        {%- endif -%}
+        {% capture grid_class_list %}{{ grid_class }} {{ mobile_grid_class }} grid-flex__item{% endcapture %}
+
+        {% for product in collection.products limit: product_count %}
+          {% assign quickbuy_toggle = settings.quickbuy_buttons_toggle %}
+          {% render 'product-block', quickbuy: quickbuy_toggle, product: product, grid_class: grid_class_list, show_vendor: block.settings.show_vendor %}
+        {%- else -%}
+          {%- if block.settings.enable_carousel == true -%}{%- assign product_count = 8 -%}{%- endif -%}
+          {% for i in (1..product_count) %}
+            <div class="featured-collection--product product-block relative grid-flex__item {{ grid_class_list }}">
+              <div class="product-block__image-container">
+                {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+                <div class="global-border-radius image-one">
+                  {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg placeholder-svg--small' }}
+                </div>
+              </div>
+              <div class="product-block__title">
+                {{ 'homepage.onboarding.product_title' | t }}
+              </div>
+              <div class="product-price"><span class="theme-money">{{ 1999 | money }}</span></div>
+            </div>
+          {% endfor %}
+        {% endfor %}
+      </div>
+
+      {%- if block.settings.enable_carousel == true -%}
+        <div class="featured-collection-controls featured-collection-controls--next">
+          <button class="btn--plain next icon feather-icon" aria-label="{{ 'general.accessibility_labels.previous' | t | escape }}">{% render 'feather-arrow-right' %}</button>
+        </div>
+        {% render 'peek-carousel-advice' %}
+      {%- endif -%}
+
+    </div>
+  </div>
+</section>
+
+</div>
+
+    {% elsif block.type == 'standout-collection' %}
+      <div class="shopify-section " {{ block.shopify_attributes }}>{% assign brightness_number = block.settings.collection_background | color_brightness %}
+{% if brightness_number < 135 %}{% assign text_color = '#ffffff' %}{% else %}{% assign text_color = '#000000' %}{% endif %}
+
+
+{%- assign collection = collections[block.settings.collection] -%}
+<section class="container container--no-mobile-padding large-row standout-collection-section section-{{ block.id }}" data-section-id="{{ block.id }}" data-nested-section-type="standout-collection">
+  {% style %}
+    .section-{{ block.id }} .page-width {
+      background-color: {{ block.settings.collection_background }};
+      color: {{ text_color }};
+    }
+
+    .section-{{ block.id }} .overlay {
+      top: {{ block.settings.overlay_position_y }}%;
+    }
+
+    .section-{{ block.id }} .image-product-label {
+      top: {{ block.settings.label_position_y }}%;
+      left: {{ block.settings.label_position_x }}%;
+    }
+  {% endstyle %}
+
+  <div class="page-width standout-collection-flex {% if block.settings.layout == 'right' %}standout-collection-flex--reverse{% endif %} global-border-radius">
+      <div class="one-half small-down--one-whole relative avoid-overlaps">
+        <div class="avoid-overlaps__mobile-container standout-collection__background-image">
+          {%- if block.settings.alternative_image != blank -%}
+            {%- assign section_image = block.settings.alternative_image -%}
+          {% elsif collection.image != blank %}
+            {%- assign section_image = collection.image -%}
+          {% endif %}
+
+          <a href="{{ collection.url }}" class="desktop-background-image lazyload rimage-background"
+            data-bgset="{% render 'bgset', image: section_image %}"
+            data-sizes="auto"
+            data-parent-fit="cover"
+            style="background-position: {{ block.settings.image_position }}">
+            <noscript>
+              {% assign image = section_image | default: collection.image %}
+              <img src="{{ image | img_url: '1024x1024' }}" alt="{{ image.alt | escape }}" class="rimage-background__image">
+            </noscript>
+          </a>
+
+          {% if section_image != blank %}
+            <a href="{{ collection.url }}" class="standout-collection__image">
+              {% render 'responsive-image', image: section_image, nomax: true %}
+            </a>
+
+          {% else %}
+            <div class="standout-collection__image--svg-placeholder">
+              {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            </div>
+          {% endif %}
+
+
+          {% if block.settings.product_id != blank %}
+            {% assign product_label = all_products[block.settings.product_id] %}
+            {% capture current_number %}{{ current }}{% endcapture %}
+            {% assign quickbuy_toggle = settings.quickbuy_labels_toggle %}
+            {% render 'image-product-label',
+                      product_label: product_label,
+                      current_number: current_number,
+                      show_chevron: block.settings.show_chevron,
+                      chevron: block.settings.chevron_position,
+                      quickbuy: quickbuy_toggle,
+                      color_bg: block.settings.color_label_background,
+                      color_text: block.settings.color_label_text %}
+          {% endif %}
+        </div>
+
+
+        {%- if collection != blank -%}
+          {%- assign collection_title = collection.title -%}
+          {%- assign collection_url = collection.url -%}
+        {%- else -%}
+          {%- capture collection_title -%}{{ 'homepage.onboarding.collection_title' | t }}{%- endcapture -%}
+          {%- assign collection_url = '#' -%}
+        {%- endif -%}
+
+        {% render 'image-overlay',
+                    background_color: block.settings.color_overlay_bg,
+                    background_opacity: block.settings.overlay_opacity,
+                    text_color: block.settings.color_overlay_text,
+                    title: collection_title,
+                    enlarge_title: block.settings.enlarge_title,
+                    url: collection_url,
+                    url_text: block.settings.overlay_url_text,
+                    url_style: block.settings.url_style,
+                    position: 'wide',
+                    mobile_text_below: true %}
+      </div>
+
+    <div class="one-half small-down--one-whole relative slider-container slider-container--mobile-padding">
+      <div class="product-carousel-peek standout-collection-slider">
+        <div class="js-standout-collection-slider will-slick">
+          {% assign quickbuy_toggle = settings.quickbuy_buttons_toggle %}
+          {% for product in collection.products limit: 15 %}
+            <div class="slide relative js-contains-quickbuy">
+              {% render 'product-block', grid_class: 'ignore', quickbuy: quickbuy_toggle, product: product, show_vendor: block.settings.show_vendor %}
+            </div>
+          {% else %}
+
+            {% for i in (1..6) %}
+              <div class="product-block slide">
+                <div class="global-border-radius">
+                  {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+                  {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg placeholder-svg--small' }}
+                </div>
+                <div class="product-block__title">
+                  <a href="#" class="product-block__title-link">{{ 'homepage.onboarding.product_title' | t }}</a>
+                </div>
+                <div class="product-price"><span class="theme-money">{{ 1999 | money }}</span></div>
+              </div>
+            {% endfor %}
+          {% endfor %}
+        </div>
+        {% render 'peek-carousel-advice' %}
+      </div>
+      <div class="standout-collection-slider__controls">
+        <button class="btn--plain prev icon feather-icon" aria-label="{{ 'general.accessibility_labels.previous' | t | escape }}">{% render 'feather-arrow-left' %}</button>
+        <button class="btn--plain next icon feather-icon" aria-label="{{ 'general.accessibility_labels.next' | t | escape }}">{% render 'feather-arrow-right' %}</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+    {% endif %}
+  {% endfor %}
+</div>
+
+{% schema %}
+  {
+    "name": "Product story",
+    "class": "section-product-story",
+    "max_blocks": 15,
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Note: The content above will appear on all products. Per product content is not yet possible on Shopify in theme settings."
+      }
+    ],
+    "blocks": [
+      {
+        
+  "name": "Rich text",
+  "type": "rich-text",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Rich text"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Use this text to share information about your store with your customers.</p><p>Describe products, share announcements, or welcome customers to your store.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "radio",
+      "id": "url_style",
+      "label": "Button style",
+      "options": [
+        {
+          "value": "button_1",
+          "label": "Button - primary"
+        },
+        {
+          "value": "button_2",
+          "label": "Button - secondary"
+        },
+        {
+          "value": "link_style",
+          "label": "Link"
+        }
+      ],
+      "default": "button_1"
+    },
+    {
+      "type": "checkbox",
+      "id": "enlarge_title",
+      "label": "Enlarge heading",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enlarge_text",
+      "label": "Enlarge text",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Wide display",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "color_bg",
+      "label": "Background color",
+      "default": "#ecf1f2"
+    },
+    {
+      "type": "color",
+      "id": "color_title",
+      "label": "Heading color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": "Text color",
+      "default": "#333333"
+    }
+  ]
+
+      },
+      {
+        
+  "name": "Image with text",
+  "type": "image-with-text",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "image_link",
+      "label": "Link"
+    },
+    {
+      "type": "select",
+      "id": "image_size",
+      "label": "Size",
+      "options": [
+        {
+          "value": "120",
+          "label": "Small"
+        },
+        {
+          "value": "60",
+          "label": "Medium"
+        },
+        {
+          "value": "30",
+          "label": "Large"
+        },
+        {
+          "value": "0",
+          "label": "Full"
+        }
+      ],
+      "default": "0",
+      "info": "Images will not be stretched or cropped."
+    },
+    {
+      "type": "radio",
+      "id": "image_position",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Image with text"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Advertise a sale! Or tell your shoppers something about yourself.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button",
+      "default": "Optional button"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "radio",
+      "id": "url_style",
+      "label": "Button style",
+      "options": [
+        {
+          "value": "button_1",
+          "label": "Button - primary"
+        },
+        {
+          "value": "button_2",
+          "label": "Button - secondary"
+        },
+        {
+          "value": "link_style",
+          "label": "Link"
+        }
+      ],
+      "default": "button_1"
+    },
+    {
+      "type": "checkbox",
+      "id": "enlarge_title",
+      "label": "Enlarge heading",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enlarge_text",
+      "label": "Enlarge text",
+      "default": false
+    },
+    {
+      "type": "radio",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "color_bg",
+      "label": "Background color",
+      "default": "#dae4e6"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": "Text color",
+      "default": "#333333"
+    }
+  ]
+
+      },
+      {
+        
+  "name": "Image with text overlay",
+  "type": "image-with-text-overlay",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "2048 x 1024px recommended"
+    },
+    {
+      "type": "url",
+      "id": "image_link",
+      "label": "Image link"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image alignment",
+      "info": "Used to keep the subject of your image in view",
+      "default": "center center",
+      "options": [
+        {
+          "value": "top left",
+          "label": "Top left"
+        },
+        {
+          "value": "top center",
+          "label": "Top center"
+        },
+        {
+          "value": "top right",
+          "label": "Top right"
+        },
+        {
+          "value": "center left",
+          "label": "Middle left"
+        },
+        {
+          "value": "center center",
+          "label": "Middle center"
+        },
+        {
+          "value": "center right",
+          "label": "Middle right"
+        },
+        {
+          "value": "bottom left",
+          "label": "Bottom left"
+        },
+        {
+          "value": "bottom center",
+          "label": "Bottom center"
+        },
+        {
+          "value": "bottom right",
+          "label": "Bottom right"
+        }
+      ]
+    },
+    {
+      "type": "radio",
+      "id": "height",
+      "label": "Image height",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "Natural"
+        },
+        {
+          "value": "fixed",
+          "label": "Fixed height"
+        }
+      ],
+      "default": "adapt"
+    },
+    {
+      "type": "range",
+      "id": "height_desktop",
+      "min": 200,
+      "max": 1000,
+      "step": 20,
+      "unit": "px",
+      "label": "Desktop fixed height",
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "height_mobile",
+      "min": 100,
+      "max": 1000,
+      "step": 20,
+      "unit": "px",
+      "label": "Mobile fixed height",
+      "default": 500
+    },
+    {
+      "type": "header",
+      "content": "Overlay"
+    },
+    {
+      "type": "color",
+      "id": "color_overlay_bg",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "label": "Background opacity",
+      "default": 80,
+      "unit": "%",
+      "info": "Does not apply when the overlay is shown under the image on mobile."
+    },
+    {
+      "type": "color",
+      "id": "color_overlay_text",
+      "label": "Text color",
+      "default": "#333333"
+    },
+    {
+      "type": "textarea",
+      "id": "overlay_title",
+      "label": "Heading",
+      "default": "Full width image"
+    },
+    {
+      "type": "text",
+      "id": "overlay_text",
+      "label": "Text",
+      "default": "Show off your images, display a promotion with product links"
+    },
+    {
+      "type": "text",
+      "id": "overlay_url_text_1",
+      "label": "Button 1 text"
+    },
+    {
+      "type": "url",
+      "id": "overlay_url_1",
+      "label": "Button 1 link"
+    },
+    {
+      "type": "text",
+      "id": "overlay_url_text_2",
+      "label": "Button 2 text"
+    },
+    {
+      "type": "url",
+      "id": "overlay_url_2",
+      "label": "Button 2 link"
+    },
+    {
+      "type": "radio",
+      "id": "overlay_url_style",
+      "label": "Button style",
+      "options": [
+        {
+          "value": "button_1",
+          "label": "Button - primary"
+        },
+        {
+          "value": "button_2",
+          "label": "Button - secondary"
+        },
+        {
+          "value": "link_style",
+          "label": "Link"
+        }
+      ],
+      "default": "button_1"
+    },
+    {
+      "type": "checkbox",
+      "id": "enlarge_title",
+      "label": "Enlarge heading",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enlarge_text",
+      "label": "Enlarge text",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "overlay_position_x",
+      "label": "Horizontal position",
+      "min": 0,
+      "max": 100,
+      "unit": "%",
+      "step": 1,
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "overlay_position_y",
+      "label": "Vertical position",
+      "min": 0,
+      "max": 100,
+      "unit": "%",
+      "step": 1,
+      "default": 70
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_text_below",
+      "label": "Show overlay below image on mobile",
+      "info": "If not ticked product labels may not show on mobile"
+    },
+    {
+      "type": "header",
+      "content": "Product labels"
+    },
+    {
+      "type": "color",
+      "id": "color_label_background",
+      "label": "Background color",
+      "default": "#ffffff",
+      "info": "If transparent, a background will be applied on small screens to aid visibility"
+    },
+    {
+      "type": "color",
+      "id": "color_label_text",
+      "label": "Text color",
+      "default": "#333333"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_chevron",
+      "label": "Show arrows",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Product label 1"
+    },
+    {
+      "type": "product",
+      "id": "product_id_1",
+      "label": "Product"
+    },
+    {
+      "type": "radio",
+      "id": "chevron_position_1",
+      "label": "Arrow position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "range",
+      "id": "label_position_x_1",
+      "label": "Horizontal position",
+      "min": 0,
+      "max": 100,
+      "unit": "%",
+      "step": 1,
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "label_position_y_1",
+      "label": "Vertical position",
+      "min": 0,
+      "max": 100,
+      "unit": "%",
+      "step": 1,
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Product label 2"
+    },
+    {
+      "type": "product",
+      "id": "product_id_2",
+      "label": "Product"
+    },
+    {
+      "type": "radio",
+      "id": "chevron_position_2",
+      "label": "Arrow position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "range",
+      "id": "label_position_x_2",
+      "label": "Horizontal position",
+      "min": 0,
+      "max": 100,
+      "unit": "%",
+      "step": 1,
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "label_position_y_2",
+      "label": "Vertical position",
+      "min": 0,
+      "max": 100,
+      "unit": "%",
+      "step": 1,
+      "default": 50
+    }
+  ]
+
+      },
+      {
+        
+  "name": "Background video",
+  "type": "background-video",
+  "settings": [
+    {
+      "id": "video",
+      "type": "text",
+      "label": "Video link",
+      "info": "Supports mp4, YouTube and Vimeo and will autoplay when possible. Only mp4 videos will play on mobile. Background videos are silent. Please read documentation before using. [Read more](https://cleancanvas.co.uk/support/general/background-video)",
+      "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc"
+    },
+    {
+      "id": "cover_image",
+      "type": "image_picker",
+      "label": "Placeholder image",
+      "info": "Required. Shows while the video is loading, or if it cannot autoplay."
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image alignment",
+      "info": "Used to keep the subject of your focus in view",
+      "default": "center center",
+      "options": [
+        {
+          "value": "top left",
+          "label": "Top left"
+        },
+        {
+          "value": "top center",
+          "label": "Top center"
+        },
+        {
+          "value": "top right",
+          "label": "Top right"
+        },
+        {
+          "value": "center left",
+          "label": "Middle left"
+        },
+        {
+          "value": "center center",
+          "label": "Middle center"
+        },
+        {
+          "value": "center right",
+          "label": "Middle right"
+        },
+        {
+          "value": "bottom left",
+          "label": "Bottom left"
+        },
+        {
+          "value": "bottom center",
+          "label": "Bottom center"
+        },
+        {
+          "value": "bottom right",
+          "label": "Bottom right"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "height_desktop",
+      "min": 200,
+      "max": 1000,
+      "step": 20,
+      "unit": "px",
+      "label": "Desktop fixed height",
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "height_mobile",
+      "min": 100,
+      "max": 1000,
+      "step": 20,
+      "unit": "px",
+      "label": "Mobile fixed height",
+      "default": 500
+    },
+    {
+      "type": "header",
+      "content": "Overlay"
+    },
+    {
+      "type": "color",
+      "id": "color_overlay_bg",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "label": "Background opacity",
+      "default": 80,
+      "unit": "%",
+      "info": "Does not apply when the overlay is shown under the image on mobile."
+    },
+    {
+      "type": "color",
+      "id": "color_overlay_text",
+      "label": "Text color",
+      "default": "#333333"
+    },
+    {
+      "type": "textarea",
+      "id": "overlay_title",
+      "label": "Heading",
+      "default": "Background video"
+    },
+    {
+      "type": "text",
+      "id": "overlay_text",
+      "label": "Text",
+      "default": "Add text and product links over a video"
+    },
+    {
+      "type": "text",
+      "id": "overlay_url_text_1",
+      "label": "Button 1 text"
+    },
+    {
+      "type": "url",
+      "id": "overlay_url_1",
+      "label": "Button 1 link"
+    },
+    {
+      "type": "text",
+      "id": "overlay_url_text_2",
+      "label": "Button 2 text"
+    },
+    {
+      "type": "url",
+      "id": "overlay_url_2",
+      "label": "Button 2 link"
+    },
+    {
+      "type": "radio",
+      "id": "overlay_url_style",
+      "label": "Button style",
+      "options": [
+        {
+          "value": "button_1",
+          "label": "Button - primary"
+        },
+        {
+          "value": "button_2",
+          "label": "Button - secondary"
+        },
+        {
+          "value": "link_style",
+          "label": "Link"
+        }
+      ],
+      "default": "button_1"
+    },
+    {
+      "type": "checkbox",
+      "id": "enlarge_title",
+      "label": "Enlarge heading",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enlarge_text",
+      "label": "Enlarge text",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "overlay_position_x",
+      "label": "Horizontal position",
+      "min": 0,
+      "max": 100,
+      "unit": "%",
+      "step": 1,
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "overlay_position_y",
+      "label": "Vertical position",
+      "min": 0,
+      "max": 100,
+      "unit": "%",
+      "step": 1,
+      "default": 70
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_text_below",
+      "label": "Show overlay below image on mobile",
+      "info": "If not ticked product labels may not show on mobile"
+    },
+    {
+      "type": "header",
+      "content": "Product labels"
+    },
+    {
+      "type": "color",
+      "id": "color_label_background",
+      "label": "Background color",
+      "default": "#ffffff",
+      "info": "If transparent, a background will be applied on small screens to aid visibility"
+    },
+    {
+      "type": "color",
+      "id": "color_label_text",
+      "label": "Text color",
+      "default": "#333333"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_chevron",
+      "label": "Show arrows",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Product label 1"
+    },
+    {
+      "type": "product",
+      "id": "product_id_1",
+      "label": "Product"
+    },
+    {
+      "type": "radio",
+      "id": "chevron_position_1",
+      "label": "Arrow position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "range",
+      "id": "label_position_x_1",
+      "label": "Horizontal position",
+      "min": 0,
+      "max": 100,
+      "unit": "%",
+      "step": 1,
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "label_position_y_1",
+      "label": "Vertical position",
+      "min": 0,
+      "max": 100,
+      "unit": "%",
+      "step": 1,
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Product label 2"
+    },
+    {
+      "type": "product",
+      "id": "product_id_2",
+      "label": "Product"
+    },
+    {
+      "type": "radio",
+      "id": "chevron_position_2",
+      "label": "Arrow position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "range",
+      "id": "label_position_x_2",
+      "label": "Horizontal position",
+      "min": 0,
+      "max": 100,
+      "unit": "%",
+      "step": 1,
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "label_position_y_2",
+      "label": "Vertical position",
+      "min": 0,
+      "max": 100,
+      "unit": "%",
+      "step": 1,
+      "default": 50
+    }
+  ]
+
+      },
+      {
+        
+  "name": "Video",
+  "type": "video",
+  "settings": [
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "label": "Video link",
+      "accept": [
+        "youtube",
+        "vimeo"
+      ],
+      "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc"
+    },
+    {
+      "id": "cover_image",
+      "type": "image_picker",
+      "label": "Cover image",
+      "info": "Required. Shows over the video before it's played."
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image alignment",
+      "info": "Used to keep the subject of your image in view",
+      "default": "center center",
+      "options": [
+        {
+          "value": "top left",
+          "label": "Top left"
+        },
+        {
+          "value": "top center",
+          "label": "Top center"
+        },
+        {
+          "value": "top right",
+          "label": "Top right"
+        },
+        {
+          "value": "center left",
+          "label": "Middle left"
+        },
+        {
+          "value": "center center",
+          "label": "Middle center"
+        },
+        {
+          "value": "center right",
+          "label": "Middle right"
+        },
+        {
+          "value": "bottom left",
+          "label": "Bottom left"
+        },
+        {
+          "value": "bottom center",
+          "label": "Bottom center"
+        },
+        {
+          "value": "bottom right",
+          "label": "Bottom right"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Overlay"
+    },
+    {
+      "type": "color",
+      "id": "color_overlay_bg",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "label": "Background opacity",
+      "default": 80,
+      "unit": "%",
+      "info": "Does not apply when the overlay is shown under the image on mobile."
+    },
+    {
+      "type": "color",
+      "id": "color_overlay_text",
+      "label": "Text color",
+      "default": "#333333"
+    },
+    {
+      "type": "textarea",
+      "id": "overlay_title",
+      "label": "Heading",
+      "default": "Video"
+    },
+    {
+      "type": "text",
+      "id": "overlay_text",
+      "label": "Text",
+      "default": "Add a video to tell your story"
+    },
+    {
+      "type": "checkbox",
+      "id": "enlarge_title",
+      "label": "Enlarge heading",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enlarge_text",
+      "label": "Enlarge text",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "overlay_position_x",
+      "label": "Horizontal position",
+      "min": 0,
+      "max": 100,
+      "unit": "%",
+      "step": 1,
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "overlay_position_y",
+      "label": "Vertical position",
+      "min": 0,
+      "max": 100,
+      "unit": "%",
+      "step": 1,
+      "default": 70
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_text_below",
+      "label": "Show overlay below image on mobile",
+      "info": "If not ticked product labels may not show on mobile"
+    }
+  ]
+
+      },
+      {
+        
+  "name": "Custom HTML",
+  "type": "custom-html-section",
+  "settings": [
+    {
+      "type": "html",
+      "id": "custom_html",
+      "label": "Custom HTML",
+      "default": "<h2>Talk about your brand</h2><p>Use HTML to format your text so it can be easily read. This text can be used to share information about your brand with customers.</p>",
+      "info": "Please note that errors in any custom HTML can affect your theme layout. Please make sure all HTML is valid."
+    }
+  ]
+
+      },
+      {
+        
+  "name": "Map",
+  "type": "map-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Map and Image"
+    },
+    {
+      "id": "api_key",
+      "type": "text",
+      "label": "Google Maps API key",
+      "info": "You’ll need to [register a Google Maps API Key](https://help.shopify.com/manual/using-themes/troubleshooting/map-section-api-key) to display the map"
+    },
+    {
+      "type": "select",
+      "id": "map_style",
+      "label": "Map style",
+      "default": "default",
+      "options": [
+        {
+          "label": "Default",
+          "value": "default"
+        },
+        {
+          "label": "Silver",
+          "value": "silver"
+        },
+        {
+          "label": "Retro",
+          "value": "retro"
+        },
+        {
+          "label": "Dark",
+          "value": "dark"
+        },
+        {
+          "label": "Night",
+          "value": "night"
+        },
+        {
+          "label": "Aubergine",
+          "value": "aubergine"
+        }
+      ]
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Image",
+      "info": "Displayed if the map isn’t loaded"
+    },
+    {
+      "type": "range",
+      "id": "height_desktop",
+      "min": 200,
+      "max": 1000,
+      "step": 20,
+      "unit": "px",
+      "label": "Desktop fixed height",
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "height_mobile",
+      "min": 100,
+      "max": 1000,
+      "step": 20,
+      "unit": "px",
+      "label": "Mobile fixed height",
+      "default": 500
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image alignment",
+      "info": "Used to keep the subject of your image in view",
+      "default": "center center",
+      "options": [
+        {
+          "value": "top left",
+          "label": "Top left"
+        },
+        {
+          "value": "top center",
+          "label": "Top center"
+        },
+        {
+          "value": "top right",
+          "label": "Top right"
+        },
+        {
+          "value": "center left",
+          "label": "Middle left"
+        },
+        {
+          "value": "center center",
+          "label": "Middle center"
+        },
+        {
+          "value": "center right",
+          "label": "Middle right"
+        },
+        {
+          "value": "bottom left",
+          "label": "Bottom left"
+        },
+        {
+          "value": "bottom center",
+          "label": "Bottom center"
+        },
+        {
+          "value": "bottom right",
+          "label": "Bottom right"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "color",
+      "id": "color_overlay_bg",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "color_overlay_text",
+      "label": "Text color",
+      "default": "#333333"
+    },
+    {
+      "id": "heading",
+      "type": "text",
+      "label": "Heading",
+      "default": "Our store"
+    },
+    {
+      "id": "address",
+      "type": "richtext",
+      "label": "Address and hours",
+      "default": "<p>123 Fake St.<br>Toronto, Canada</p><p>Mon - Fri, 10am - 9pm<br>Saturday, 11am - 9pm<br>Sunday, 11am - 5pm</p>"
+    },
+    {
+      "id": "map_address",
+      "type": "text",
+      "label": "Map address",
+      "info": "Google Maps will find the exact location",
+      "default": "80 Spadina Ave, Toronto"
+    },
+    {
+      "id": "button_text",
+      "type": "text",
+      "label": "Map link label",
+      "default": "Get directions"
+    },
+    {
+      "type": "radio",
+      "id": "url_style",
+      "label": "Map link style",
+      "options": [
+        {
+          "value": "button_1",
+          "label": "Button - primary"
+        },
+        {
+          "value": "button_2",
+          "label": "Button - secondary"
+        },
+        {
+          "value": "link_style",
+          "label": "Link"
+        }
+      ],
+      "default": "button_1"
+    },
+    {
+      "type": "checkbox",
+      "id": "enlarge_title",
+      "label": "Enlarge heading",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enlarge_text",
+      "label": "Enlarge text",
+      "default": false
+    },
+    {
+      "id": "show_pin",
+      "type": "checkbox",
+      "label": "Show pin",
+      "default": true
+    }
+  ]
+
+      },
+      {
+        
+  "name": "Newsletter",
+  "type": "newsletter-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Newsletter"
+    },
+    {
+      "type": "richtext",
+      "id": "section_subtitle",
+      "label": "Text",
+      "default": "<p>Sign up now!</p>"
+    },
+    {
+      "type": "color",
+      "id": "section_background_colour",
+      "label": "Background color",
+      "default": "#ecf1f2"
+    },
+    {
+      "type": "color",
+      "id": "section_text_colour",
+      "label": "Text color",
+      "default": "#333333"
+    },
+    {
+      "type": "radio",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        {
+          "value": "button_1",
+          "label": "Button - primary"
+        },
+        {
+          "value": "button_2",
+          "label": "Button - secondary"
+        }
+      ],
+      "default": "button_1"
+    },
+    {
+      "type": "checkbox",
+      "id": "enlarge_title",
+      "label": "Enlarge heading",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enlarge_text",
+      "label": "Enlarge text",
+      "default": false
+    },
+    {
+      "type": "paragraph",
+      "content": "Customers who subscribe will have their email address added to the “accepts marketing” [customer list](/admin/customers?query=&accepts_marketing=1)"
+    }
+  ]
+
+      },
+      {
+        
+  "name": "Featured collection",
+  "type": "featured-collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Featured collection"
+    },
+    {
+      "type": "checkbox",
+      "id": "enlarge_title",
+      "label": "Enlarge heading",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Link text",
+      "default": "Shop now"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show product vendor",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_carousel",
+      "label": "Enable carousel",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "grid",
+      "label": "Desktop products per row",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "row_count",
+      "label": "Rows (desktop)",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 1,
+      "info": "Does not apply to carousel layout"
+    },
+    {
+      "type": "select",
+      "id": "grid_mobile",
+      "label": "Mobile products per row",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
+      ],
+      "default": "2"
+    }
+  ]
+
+      },
+      {
+        
+  "name": "Promotional collection",
+  "type": "standout-collection",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "color",
+      "id": "collection_background",
+      "label": "Background color",
+      "default": "#dae4e6"
+    },
+    {
+      "type": "image_picker",
+      "id": "alternative_image",
+      "label": "Image",
+      "info": "If no image is selected, the Collection image will be displayed"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image alignment",
+      "info": "Used to keep the subject of your image in view",
+      "default": "center center",
+      "options": [
+        {
+          "value": "top left",
+          "label": "Top left"
+        },
+        {
+          "value": "top center",
+          "label": "Top center"
+        },
+        {
+          "value": "top right",
+          "label": "Top right"
+        },
+        {
+          "value": "center left",
+          "label": "Middle left"
+        },
+        {
+          "value": "center center",
+          "label": "Middle center"
+        },
+        {
+          "value": "center right",
+          "label": "Middle right"
+        },
+        {
+          "value": "bottom left",
+          "label": "Bottom left"
+        },
+        {
+          "value": "bottom center",
+          "label": "Bottom center"
+        },
+        {
+          "value": "bottom right",
+          "label": "Bottom right"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        {
+          "value": "left",
+          "label": "Image left"
+        },
+        {
+          "value": "right",
+          "label": "Image right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show product vendor",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Text overlay"
+    },
+    {
+      "type": "color",
+      "id": "color_overlay_bg",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "label": "Background opacity",
+      "default": 80,
+      "unit": "%",
+      "info": "Does not apply when the overlay is shown under the image on mobile."
+    },
+    {
+      "type": "color",
+      "id": "color_overlay_text",
+      "label": "Text color",
+      "default": "#333333"
+    },
+    {
+      "type": "text",
+      "id": "overlay_url_text",
+      "label": "Button text",
+      "default": "Shop now"
+    },
+    {
+      "type": "radio",
+      "id": "url_style",
+      "label": "Button style",
+      "options": [
+        {
+          "value": "button_1",
+          "label": "Button - primary"
+        },
+        {
+          "value": "button_2",
+          "label": "Button - secondary"
+        },
+        {
+          "value": "link_style",
+          "label": "Link"
+        }
+      ],
+      "default": "button_1"
+    },
+    {
+      "type": "checkbox",
+      "id": "enlarge_title",
+      "label": "Enlarge heading",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "overlay_position_y",
+      "label": "Desktop vertical position",
+      "min": 0,
+      "max": 100,
+      "unit": "%",
+      "step": 1,
+      "default": 70
+    },
+    {
+      "type": "header",
+      "content": "Image product label"
+    },
+    {
+      "type": "color",
+      "id": "color_label_background",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "color_label_text",
+      "label": "Text color",
+      "default": "#333333"
+    },
+    {
+      "type": "product",
+      "id": "product_id",
+      "label": "Product"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_chevron",
+      "label": "Show arrow",
+      "default": true
+    },
+    {
+      "type": "radio",
+      "id": "chevron_position",
+      "label": "Arrow position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "range",
+      "id": "label_position_x",
+      "label": "Horizontal position",
+      "min": 0,
+      "max": 100,
+      "unit": "%",
+      "step": 1,
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "label_position_y",
+      "label": "Vertical position",
+      "min": 0,
+      "max": 100,
+      "unit": "%",
+      "step": 1,
+      "default": 30
+    }
+  ]
+
+      }
+    ]
+  }
+{% endschema %}
