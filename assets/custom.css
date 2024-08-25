@@ -28,3 +28,17 @@
   font-weight: bold;
   line-height: 1.4;
 }
+
+.product-detail__images-container {
+    position: sticky;
+    top: 80px;
+}
+.bis-reset {
+    top: 300px;
+}
+
+@media screen and (max-width: 500px) {
+    .bis-reset {
+        top: 100px;
+    }
+}

@@ -766,12 +766,12 @@
       "popup": {
         "type": "popup",
         "settings": {
-          "mode": "disabled",
+          "mode": "enabled",
           "popup_delay_seconds": 2,
           "popup_dismiss_for_days": 2,
           "position": "center",
           "title": "SHIPPING MAY BE DELAYED",
-          "text": "<p>HEADS UP! WE'LL BE OUT OF THE SHOP ATTENDING THE SE REGIONAL QUALIFIER AT NCMP AND WON'T BE SHIPPING PARTS TILL NEXT WEEK. SORRY FOR ANY INCONVENIENCE THIS MAY CAUSE. THANKS!<\/p>",
+          "text": "<p>TODAY WEBSITE IS UNDER MAINTENANCE TODAY.  PRODUCT PAGES MIGHT NOT DISPLAY AS USUAL AT TIMES.  FEEL FREE TO CALL IF NEEDED. 7049028004<\/p>",
           "show_newsletter": false,
           "show_social_icons": false
         }
